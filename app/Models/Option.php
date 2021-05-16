@@ -5,29 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StudentAnswer extends Model
+class Option extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'exam_detail_id',
-        'question_id',
-        'option_id'
+        'option',
+        'referenced_file',
+        'is_correct',
+        'question_id'
     ];
-
-    public function examDetail(): BelongsTo
-    {
-        return $this->belongsTo(ExamDetail::class);
-    }
 
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
-    }
-
-    public function option(): BelongsTo
-    {
-        return $this->belongsTo(Option::class);
     }
 }

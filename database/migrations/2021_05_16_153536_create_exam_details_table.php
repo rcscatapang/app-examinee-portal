@@ -16,7 +16,6 @@ class CreateExamDetailsTable extends Migration
         Schema::create('exam_details', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->text('description');
             $table->integer('exam_score')->default(0);
             $table->integer('exam_result')->default(0);
             $table->integer('status');
