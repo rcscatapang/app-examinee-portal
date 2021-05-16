@@ -20,6 +20,7 @@ class CreateInstructorsTable extends Migration
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('contact_number');
+            $table->string('institution');
             $table->text('photo');
             $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();

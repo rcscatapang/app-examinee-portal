@@ -18,6 +18,7 @@ class CreateExamDetailsTable extends Migration
             $table->string('code');
             $table->integer('exam_score')->default(0);
             $table->integer('exam_result')->default(0);
+            $table->timestamp('date_completed')->nullable();
             $table->integer('status');
             $table->foreignId('exam_id')->constrained('exams');
             $table->foreignId('student_id')->constrained('students');

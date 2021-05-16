@@ -19,6 +19,7 @@ class CreateExamsTable extends Migration
             $table->text('description');
             $table->integer('total_questions')->default(0);
             $table->dateTime('examination_date');
+            $table->integer('status');
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('instructor_id')->constrained('instructors');
             $table->softDeletes();
