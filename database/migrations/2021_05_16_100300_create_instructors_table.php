@@ -21,7 +21,7 @@ class CreateInstructorsTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('contact_number');
             $table->string('institution');
-            $table->text('photo');
+            $table->text('photo')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
