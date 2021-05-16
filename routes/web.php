@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Instructor;
+use App\Http\Controllers\Student;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +21,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])->group(function () {
+
+    // Dashboard
+    Route::get('dashboard', Instructor\DashboardController::class);
+});
+
+Route::middleware(['web.student'])->group(function () {
+
+    // Dashboard
+    Route::get('dashboard', Student\DashboardController::class);
+});
