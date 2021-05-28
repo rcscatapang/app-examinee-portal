@@ -8,6 +8,7 @@ class ExamsController extends Controller
 {
     public function index()
     {
+        return view('instructor.exams.index');
     }
 
     public function create()

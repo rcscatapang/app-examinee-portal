@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-indigo">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-blue">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav align-items-center ml-md-auto"></ul>
@@ -22,7 +22,7 @@
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <span class="mb-0 text-sm font-weight-bold">
-                                    Administrator
+                                    Student
                                 </span>
                             </div>
                         </div>

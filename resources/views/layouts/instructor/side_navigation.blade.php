@@ -3,7 +3,8 @@
     <div class="scrollbar-inner">
         <div class="sidenav-header d-flex align-items-center">
             <a class="navbar-brand">
-                <h3 class="my-auto">Examinee Portal</h3>
+                <img src="{{ asset('img/brand/logo-brand.png') }}" class="img-fluid" style="min-height: 35px;">
+                <h5 class="my-auto">Instructor Portal</h5>
             </a>
             <div class="ml-auto">
                 <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">

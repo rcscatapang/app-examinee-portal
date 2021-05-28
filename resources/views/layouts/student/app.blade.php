@@ -10,8 +10,6 @@
 
     {{--Favicon--}}
     <link rel="icon" href="{{ asset('img/brand/favicon.png') }}" type="image/png">
-    {{--Fonts--}}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     {{--Styles--}}
     <link href="{{ asset('vendor/nucleo/css/nucleo.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -24,12 +22,12 @@
     @yield('content')
 @else
     <body class="g-sidenav-pinned">
-    @include('layouts.admin.side_navigation')
+    @include('layouts.student.side_navigation')
 
-    <div id="app" class="main-content" id="panel">
-        <div class="bg-indigo">
-            @include('layouts.admin.top_navigation')
-            @include('layouts.admin.header')
+    <div class="main-content" id="panel">
+        <div class="bg-blue">
+            @include('layouts.student.top_navigation')
+            @include('layouts.student.header')
         </div>
 
         <div class="container-fluid mt--6">
@@ -39,8 +37,6 @@
         </div>
     </div>
     @endguest
-
-    @include('shared.modal_reorder_alert')
 
     {{--Scripts--}}
     <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
@@ -55,7 +51,7 @@
     <script>
         $(document).ready(function () {
             @if(session()->has('has_product_below_threshold'))
-                $('#modalProductBelowThreshold').modal('show');
+            $('#modalProductBelowThreshold').modal('show');
             @endif
         });
     </script>

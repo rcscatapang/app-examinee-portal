@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers\Instructor;
 
+use App\Enums\CourseInviteStatus;
 use App\Http\Controllers\Controller;
+use App\Mail\CourseInviteMail;
 use App\Models\Course;
-use App\Notifications\CourseInviteNotification;
+use App\Models\CourseInvite;
+use App\Traits\ManagesTransactions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
+    use ManagesTransactions;
+
     public function index()
     {
         $instructor = auth()->user()->instructor;
@@ -21,9 +28,19 @@ class CoursesController extends Controller
     public function invite(Request $request, Course $course): RedirectResponse
     {
         $input = $request->all();
-        Notification::route('mail', $input['email_address'])
-            ->notify(new CourseInviteNotification($course, $input['email_address'], $input['name']));
 
+        $response = $this->transaction(
+            function () use ($input, $course) {
+                $input['invite_code'] = strtoupper(Str::random(6));
+                $input['course_id'] = $course->id;
+                $course_invite = CourseInvite::create($input);
+                Mail::to($input['email_address'])->send(new CourseInviteMail($course, $course_invite));
+            }
+        );
+
+        if ($response['status_code'] !== Response::HTTP_OK) {
+            abort(500);
+        }
         return redirect()->back();
     }
 
@@ -41,8 +58,11 @@ class CoursesController extends Controller
         return redirect()->route('instructor.courses');
     }
 
-    public function show()
+    public function show(Course $course)
     {
+        $course_invites = $course->courseInvites->where('status', '!=', CourseInviteStatus::Accepted);
+        $students = $course->students;
+        return view('instructor.courses.show', compact(['course', 'course_invites', 'students']));
     }
 
     public function edit()
