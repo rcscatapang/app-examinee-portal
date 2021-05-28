@@ -16,6 +16,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('academic_year')->nullable();
             $table->text('description');
             $table->foreignId('instructor_id')->constrained('instructors');
             $table->softDeletes();
