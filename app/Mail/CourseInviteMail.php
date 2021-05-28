@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Course;
+use App\Models\CourseInvite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -12,15 +13,13 @@ class CourseInviteMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    private $course;
-    private $email_address;
-    private $name;
+    public $course;
+    public $course_invite;
 
-    public function __construct(Course $course, $name, $email_address)
+    public function __construct(Course $course, CourseInvite $course_invite)
     {
         $this->course = $course;
-        $this->name = $name;
-        $this->email_address = $email_address;
+        $this->course_invite = $course_invite;
     }
 
     public function build(): CourseInviteMail

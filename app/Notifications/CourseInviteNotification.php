@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Mail\CourseInviteMail;
 use App\Models\Course;
+use App\Models\CourseInvite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
@@ -12,14 +13,12 @@ class CourseInviteNotification extends Notification
     use Queueable;
 
     private $course;
-    private $email_address;
-    private $name;
+    private $course_invite;
 
-    public function __construct(Course $course, $email_address, $name)
+    public function __construct(Course $course, CourseInvite $course_invite)
     {
         $this->course = $course;
-        $this->email_address = $email_address;
-        $this->name = $name;
+        $this->course_invite = $course_invite;
     }
 
     public function via($notifiable): array
@@ -29,7 +28,7 @@ class CourseInviteNotification extends Notification
 
     public function toMail($notifiable): CourseInviteMail
     {
-        return (new CourseInviteMail($this->course, $this->name, $this->email_address));
+        return (new CourseInviteMail($this->course, $this->course_invite));
     }
 
     public function toArray($notifiable): array

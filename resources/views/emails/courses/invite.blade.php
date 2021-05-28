@@ -1,12 +1,13 @@
 @component('mail::message')
-# Introduction
+# Greetings and welcome aboard!<br><br>
 
-The body of your message.
+You've been invited to join <b>{{ $course->name }}</b>. To accept this request you'll need a registered account at hala.com.
+Please use the following email address and invite code: <br>
 
-@component('mail::button', ['url' => ''])
-Button Text
+Email Address: <b>{{ $course_invite->email_address }}</b> <br>
+Invite Code: <b>{{ $course_invite->invite_code }}</b>
+
+@component('mail::button', ['url' => config('app.url')])
+Get Started
 @endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
 @endcomponent
