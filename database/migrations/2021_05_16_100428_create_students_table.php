@@ -21,9 +21,9 @@ class CreateStudentsTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('contact_number');
             $table->string('email');
-            $table->date('birthday');
-            $table->integer('gender');
-            $table->text('photo');
+            $table->date('birthday')->nullable();
+            $table->integer('gender')->nullable();
+            $table->text('photo')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();

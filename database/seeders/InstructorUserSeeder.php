@@ -19,6 +19,7 @@ class InstructorUserSeeder extends Seeder
                 'email' => 'johndoe@example.com',
                 'password' => Hash::make('secret'),
                 'user_type' => UserType::Instructor,
+                'account_verified_at' => Carbon::now(),
                 'email_verified_at' => Carbon::now()
             ]
         );
