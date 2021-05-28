@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseInvitesTable extends Migration
+class CreateStudentCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCourseInvitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_invites', function (Blueprint $table) {
+        Schema::create('student_courses', function (Blueprint $table) {
             $table->id();
-            $table->string('email_address');
-            $table->string('invite_code');
-            $table->integer('status')->default(\App\Enums\CourseInviteStatus::Pending);
+            $table->foreignId('student_id')->constrained('students');
             $table->foreignId('course_id')->constrained('courses');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateCourseInvitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_invites');
+        Schema::dropIfExists('student_courses');
     }
 }

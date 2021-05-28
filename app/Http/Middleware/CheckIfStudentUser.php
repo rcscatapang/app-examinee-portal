@@ -20,7 +20,7 @@ class CheckIfStudentUser
         $user_type = $request->user()->user_type;
         if ($user_type !== UserType::Student) {
             if ($user_type === UserType::Instructor) {
-                return redirect()->route('admin.instructor.dashboard');
+                return redirect()->route('instructor.dashboard');
             } else {
                 abort(404);
             }

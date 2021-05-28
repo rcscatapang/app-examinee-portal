@@ -12,6 +12,7 @@ class CourseInvite extends Model
 
     protected $fillable = [
         'email_address',
+        'invite_code',
         'status',
         'course_id'
     ];
