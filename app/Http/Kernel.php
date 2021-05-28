@@ -40,11 +40,15 @@ class Kernel extends HttpKernel
         ],
 
         'web.instructor' => [
+            \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            \App\Http\Middleware\CheckIfAccountVerified::class,
             \App\Http\Middleware\CheckIfInstructorUser::class
         ],
 
         'web.student' => [
             \App\Http\Middleware\Authenticate::class,
+            \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            \App\Http\Middleware\CheckIfAccountVerified::class,
             \App\Http\Middleware\CheckIfStudentUser::class
         ],
 
