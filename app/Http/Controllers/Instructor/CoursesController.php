@@ -13,6 +13,9 @@ class CoursesController extends Controller
 {
     public function index()
     {
+        $instructor = auth()->user()->instructor;
+        $courses = Course::where('instructor_id', $instructor->id)->orderBy('name')->get();
+        return view('instructor.courses.index', compact(['courses', 'instructor']));
     }
 
     public function invite(Request $request, Course $course): RedirectResponse
@@ -26,10 +29,16 @@ class CoursesController extends Controller
 
     public function create()
     {
+        return view('instructor.courses.create');
     }
 
-    public function store()
+    public function store(Request $request): RedirectResponse
     {
+        $input = $request->all();
+        $input['instructor_id'] = auth()->user()->instructor->id;
+        Course::create($input);
+
+        return redirect()->route('instructor.courses');
     }
 
     public function show()

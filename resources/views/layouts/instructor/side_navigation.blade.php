@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('instructor.dashboard') }}" id="dashboard">
+                        <a class="nav-link" href="{{ route('instructor.courses') }}" id="dashboard">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <span class="nav-link-text">
                                 Course Management
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('instructor.dashboard') }}" id="dashboard">
+                        <a class="nav-link" href="{{ route('instructor.exams') }}" id="dashboard">
                             <i class="fas fa-th-list"></i>
                             <span class="nav-link-text">
                                 Exam Management

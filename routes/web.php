@@ -5,12 +5,11 @@ use App\Http\Controllers\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Landing pages
+Route::get('/', function () { return view('welcome'); });
 
+// Authentication routes
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])->group(function () {
 
