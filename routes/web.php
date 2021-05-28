@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () { return view('welcome'); });
 
 // Authentication routes
-Auth::routes();
+Auth::routes(['verify' => true]);
+Route::get('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class, 'onboarding'])->name('onboarding');
+Route::post('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class, 'complete'])->name('onboarding.complete');
 
 Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])->group(function () {
 

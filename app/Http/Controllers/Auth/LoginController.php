@@ -34,7 +34,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->user_type === UserTypeEnum::Student) {
-            return redirect()->route('student.dashboard');
+            return redirect()->route('dashboard');
         } elseif ($user->user_type === UserTypeEnum::Instructor) {
             return redirect()->route('instructor.dashboard');
         } else {
