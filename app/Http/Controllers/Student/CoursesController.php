@@ -7,6 +7,7 @@ use App\Enums\StudentCourseStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseInvite;
+use App\Models\Student;
 use App\Models\StudentCourse;
 use App\Traits\ManagesTransactions;
 use Illuminate\Http\RedirectResponse;
@@ -38,9 +39,16 @@ class CoursesController extends Controller
     public function enroll(Request $request): RedirectResponse
     {
         $input = $request->all();
+        $student = Student::find($input['student_id']);
         $student_course = StudentCourse::where('course_id', $input['course_id'])
             ->where('student_id', $input['student_id'])->first();
+
         if (!$student_course) {
+            $course_invite = CourseInvite::where('email_address', $student->email)
+                ->where('invite_code', $request['invite_code'])->first();
+            $course_invite->status = CourseInviteStatus::Accepted;
+            $course_invite->save();
+
             $course = Course::find($input['course_id']);
             StudentCourse::create(
                 [

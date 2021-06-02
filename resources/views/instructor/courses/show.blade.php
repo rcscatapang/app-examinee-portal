@@ -43,6 +43,11 @@
                         </div>
                         <div class="card-body">
                             @forelse($students as $student)
+                                <li class="ml-4">
+                                    <a href="#" class="text-muted">
+                                        {{ $student->code }} - {{ ucwords($student->full_name) }}
+                                    </a>
+                                </li>
                             @empty
                                 <h4 class="font-italic font-weight-300"> No records yet — </h4>
                             @endforelse
