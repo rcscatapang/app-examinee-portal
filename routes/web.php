@@ -42,4 +42,10 @@ Route::middleware(['web.student'])->group(function () {
 
     // Dashboard
     Route::get('dashboard', Student\DashboardController::class)->name('dashboard');
+
+    // Course management
+    Route::get('join-courses', [Student\CoursesController::class, 'join'])->name('courses.join');
+    Route::post('join-courses/search', [Student\CoursesController::class, 'search'])->name('courses.search');
+    Route::post('join-courses/enroll', [Student\CoursesController::class, 'enroll'])->name('courses.enroll');
+    Route::get('courses/{course}', [Student\CoursesController::class, 'show'])->name('courses.show');
 });

@@ -28,6 +28,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('courses.join') }}" id="join-course">
+                            <i class="fas fa-book"></i>
+                            <span class="nav-link-text">
+                                Enroll to Course
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt"></i>
