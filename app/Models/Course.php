@@ -28,7 +28,7 @@ class Course extends Model
 
     public function instructor(): BelongsTo
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Instructor::class);
     }
 
     public function courseInvites(): HasMany
