@@ -44,7 +44,7 @@
                         <div class="card-body">
                             @forelse($students as $student)
                                 <li class="ml-4">
-                                    <a href="#" class="text-muted">
+                                    <a href="{{ route('instructor.students.show', $student->id) }}" class="text-muted">
                                         {{ $student->code }} - {{ ucwords($student->full_name) }}
                                     </a>
                                 </li>

@@ -14,13 +14,15 @@ class StudentsController extends Controller
 {
     public function index()
     {
-        $table_headers = ['student code', 'first name', 'last name', 'email', 'contact number', 'gender'];
+        $table_headers = ['student code', 'first name', 'last name', 'email', 'contact number', 'gender', ''];
         return view('instructor.students.index', compact(['table_headers']));
     }
 
-    public function show()
+    public function show(Student $student)
     {
-        return view('instructor.students.show');
+        $instructor = auth()->user()->instructor;
+        $student_courses = $student->courses->where('instructor_id', $instructor->id);
+        return view('instructor.students.show', compact(['student', 'student_courses']));
     }
 
     public function getDataTable(): JsonResponse
@@ -32,6 +34,15 @@ class StudentsController extends Controller
             ->distinct('student_id')->pluck('student_id');
 
         $students = Student::whereIn('id', $students_id);
-        return DataTables::eloquent($students)->rawColumns(['action_column'])->toJson();
+        return DataTables::eloquent($students)
+            ->addColumn(
+                'action_column',
+                function ($student) {
+                    $route = route('instructor.students.show', ['student' => $student->id]);
+                    return '<a href="' . $route . '" class="table-action"><i class="fas fa-chevron-right"></i></a>';
+                }
+            )
+            ->rawColumns(['action_column'])
+            ->toJson();
     }
 }

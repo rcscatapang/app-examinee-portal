@@ -80,7 +80,8 @@
                         {data: 'last_name', name: 'last_name'},
                         {data: 'email', name: 'email', orderable: false},
                         {data: 'contact_number', name: 'contact_number', orderable: false, searchable: false},
-                        {data: 'gender', name: 'gender', orderable: false}
+                        {data: 'gender', name: 'gender', orderable: false},
+                        {data: 'action_column', name: 'action_column', orderable: false, searchable: false},
                     ],
                 }
                 var table = $this.on('init.dt', function () {

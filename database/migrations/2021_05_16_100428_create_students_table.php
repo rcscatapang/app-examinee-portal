@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('contact_number');
             $table->string('email');
             $table->date('birthday')->nullable();
-            $table->integer('gender')->nullable();
+            $table->string('gender')->nullable();
             $table->text('photo')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
