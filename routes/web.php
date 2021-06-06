@@ -27,6 +27,10 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
     Route::post('courses/{course}/update', [Instructor\CoursesController::class, 'update'])->name('courses.update');
     Route::post('courses/{course}/invite', [Instructor\CoursesController::class, 'invite'])->name('courses.invite');
 
+    // Students management
+    Route::get('students', [Instructor\StudentsController::class, 'index'])->name('students');
+    Route::get('students/{student}', [Instructor\StudentsController::class, 'show'])->name('students.show');
+
     // Exam management
     Route::get('exams', [Instructor\ExamsController::class, 'index'])->name('exams');
     Route::post('exams', [Instructor\ExamsController::class, 'store'])->name('exams.store');
@@ -35,6 +39,9 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
     Route::get('exams/{exam}/edit', [Instructor\ExamsController::class, 'edit'])->name('exams.edit');
     Route::post('exams/{exam}/update', [Instructor\ExamsController::class, 'update'])->name('exams.update');
     Route::post('exams/{exam}/publish', [Instructor\ExamsController::class, 'update'])->name('exams.publish');
+
+    // DataTables management
+    Route::get('data-tables/students', [Instructor\StudentsController::class, 'getDataTable'])->name('dataTable.students');
 
 });
 

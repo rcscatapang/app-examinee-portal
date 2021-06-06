@@ -36,6 +36,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('instructor.students') }}" id="students">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-link-text">
+                                Student Management
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('instructor.exams') }}" id="exams">
                             <i class="fas fa-th-list"></i>
                             <span class="nav-link-text">
