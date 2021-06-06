@@ -15,9 +15,14 @@ class Exam extends Model
 
     protected $fillable = [
         'code',
+        'type',
         'description',
         'total_questions',
-        'examination_date',
+        'start_date',
+        'end_date',
+        'published_date',
+        'completed_date',
+        'status',
         'course_id',
         'instructor_id'
     ];

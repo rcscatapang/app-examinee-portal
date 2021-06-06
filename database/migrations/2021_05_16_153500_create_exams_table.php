@@ -16,9 +16,13 @@ class CreateExamsTable extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->string('type');
             $table->text('description');
             $table->integer('total_questions')->default(0);
-            $table->dateTime('examination_date');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
+            $table->timestamp('published_date');
+            $table->timestamp('completed_date');
             $table->integer('status');
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('instructor_id')->constrained('instructors');
