@@ -22,7 +22,7 @@
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <span class="mb-0 text-sm font-weight-bold">
-                                    Student
+                                    {{ $app_data['currentUser']->name }}
                                 </span>
                             </div>
                         </div>

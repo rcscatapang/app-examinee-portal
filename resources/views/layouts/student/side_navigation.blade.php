@@ -27,6 +27,27 @@
                             </span>
                         </a>
                     </li>
+                    @if(count($app_data['courses']) > 0)
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#navbar-courses" data-toggle="collapse" role="button"
+                               aria-expanded="false" aria-controls="navbar-dashboards">
+                                <i class="fas fa-users"></i>
+                                <span class="nav-link-text">Courses</span>
+                            </a>
+                            <div class="collapse" id="navbar-courses" style="">
+                                <ul class="nav nav-sm flex-column">
+                                    @foreach($app_data['courses'] as $course)
+                                        <li class="nav-item">
+                                            <a href="{{ route('courses.show', $course->id) }}" class="nav-link">
+                                                <span class="sidenav-mini-icon"> C </span>
+                                                <span class="sidenav-normal"> {{ $course->name }} </span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('courses.join') }}" id="join-course">
                             <i class="fas fa-book"></i>
