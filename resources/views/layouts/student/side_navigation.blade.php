@@ -49,6 +49,14 @@
                         </li>
                     @endif
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('exams') }}" id="join-course">
+                            <i class="fas fa-folder"></i>
+                            <span class="nav-link-text">
+                                Examinations
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('courses.join') }}" id="join-course">
                             <i class="fas fa-book"></i>
                             <span class="nav-link-text">

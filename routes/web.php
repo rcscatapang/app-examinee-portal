@@ -51,9 +51,16 @@ Route::middleware(['web.student'])->group(function () {
     // Dashboard
     Route::get('dashboard', Student\DashboardController::class)->name('dashboard');
 
-    // Course management
+    // Courses
     Route::get('join-courses', [Student\CoursesController::class, 'join'])->name('courses.join');
     Route::post('join-courses/search', [Student\CoursesController::class, 'search'])->name('courses.search');
     Route::post('join-courses/enroll', [Student\CoursesController::class, 'enroll'])->name('courses.enroll');
     Route::get('courses/{course}', [Student\CoursesController::class, 'show'])->name('courses.show');
+
+    // Examinations
+    Route::get('exams', [Student\ExamsController::class, 'index'])->name('exams');
+    Route::get('exams/{exam}', [Student\ExamsController::class, 'show'])->name('exams.show');
+    Route::get('exams/{exam}/answer/{question}', [Student\ExamsController::class, 'answer'])->name('exams.answer');
+    Route::post('exams/{exam}/submit/{question}', [Student\ExamsController::class, 'submit'])->name('exams.submit');
+    Route::post('exams/{exam}/complete', [Student\ExamsController::class, 'complete'])->name('exams.complete');
 });
