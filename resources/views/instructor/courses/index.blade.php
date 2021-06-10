@@ -17,7 +17,7 @@
 @section('content')
     <div class="col-md-12">
         <div class="row card-wrapper">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card" style="min-height: 300px !important;">
                     <div class="card-body">
                         <p class="card-text mb-4">
@@ -36,7 +36,7 @@
             </div>
 
             @foreach($courses as $course)
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card" style="min-height: 300px !important;">
                         <div class="card-header border-0 pb-0">
                             <h5 class="h3 mb-0">{{ $course->name }}</h5>

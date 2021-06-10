@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-    <div class="col-md-6">
+    <div class="col-md-9">
         <div class="row">
             <div class="col">
                 <div class="card-wrapper">
@@ -38,6 +38,7 @@
                             <div class="card-footer">
                                 <form method="post" action="{{ route('courses.enroll') }}">
                                     @csrf
+                                    <input type="hidden" name="invite_code" value="{{ $invite_code }}">
                                     <input type="hidden" name="course_id" value="{{ $course->id }}">
                                     <input type="hidden" name="student_id" value="{{ $student->id }}">
                                     <button class="btn btn-primary mr-2" type="submit">Confirm Enrollment</button>

@@ -30,7 +30,10 @@ class CoursesController extends Controller
             ->where('status', CourseInviteStatus::Pending)->first();
 
         if ($course_invite) {
-            return redirect()->route('courses.show', $course_invite->course_id);
+            return redirect()->route(
+                'courses.show',
+                [$course_invite->course_id, 'invite_code' => $request['invite_code']]
+            );
         }
 
         return redirect()->back();
@@ -63,14 +66,19 @@ class CoursesController extends Controller
         return redirect()->back();
     }
 
-    public function show(Course $course)
+    public function show(Course $course, Request $request)
     {
+        $invite_code = null;
+        if (isset($request['invite_code'])) {
+            $invite_code = $request['invite_code'];
+        }
+
         $instructor = $course->instructor;
         $student = auth()->user()->student;
         $student_course = StudentCourse::where('course_id', $course->id)
             ->where('student_id', $student->id)->first();
         $student->is_enrolled = (bool)$student_course;
 
-        return view('student.courses.show', compact(['course', 'instructor', 'student']));
+        return view('student.courses.show', compact(['course', 'instructor', 'student', 'invite_code']));
     }
 }
