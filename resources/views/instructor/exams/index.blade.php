@@ -45,3 +45,58 @@
         </div>
     </div>
 @stop
+
+@section('styles')
+    @include('shared.data_tables_css')
+@stop
+
+@section('scripts')
+    @include('shared.data_tables_js')
+    <script>
+        var DatatableList = (function () {
+            var $dtList = $('#datatable-list')
+
+            function init($this) {
+                var ajax_url = "{{ route('instructor.dataTable.exams') }}"
+                var buttons = ["copy", "csv"];
+                var options = {
+                    bDestroy: true,
+                    bAutoWidth: true,
+                    processing: true,
+                    serverSide: true,
+                    lengthChange: true,
+                    pageLength: 10,
+                    buttons: buttons,
+                    language: {
+                        paginate: {
+                            previous: "<i class='fas fa-angle-left'>",
+                            next: "<i class='fas fa-angle-right'>"
+                        }
+                    },
+                    ajax: {
+                        "url": ajax_url,
+                        "dataType": "json",
+                        "type": "GET",
+                        "data": {_token: "{{ csrf_token() }}"}
+                    },
+                    order: ['2', 'desc'],
+                    columns: [
+                        {data: 'code', name: 'code'},
+                        {data: 'type', name: 'type'},
+                        {data: 'start_date', name: 'start_date'},
+                        {data: 'status', name: 'status', orderable: false},
+                        {data: 'updated_at', name: 'updated_at'},
+                        {data: 'action_column', name: 'action_column', orderable: false, searchable: false},
+                    ],
+                }
+                var table = $this.on('init.dt', function () {
+                    $('div.dataTables_length select').removeClass('custom-select custom-select-sm');
+                }).DataTable(options)
+            }
+
+            if ($dtList.length) {
+                init($dtList);
+            }
+        })()
+    </script>
+@stop
