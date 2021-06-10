@@ -20,12 +20,12 @@ class ExamScheduleNotification extends Notification
 
     public function via($notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     public function toMail($notifiable): ExamScheduleMail
     {
-        return (new ExamScheduleMail($this->exam, $notifiable));
+        return (new ExamScheduleMail($this->exam, $notifiable))->to($notifiable->email);
     }
 
     public function toArray($notifiable): array

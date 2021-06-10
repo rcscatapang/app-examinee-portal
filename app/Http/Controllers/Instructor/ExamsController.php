@@ -6,6 +6,7 @@ use App\Enums\ExamStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Notifications\ExamScheduleNotification;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -50,7 +51,7 @@ class ExamsController extends Controller
                 break;
             case ExamStatus::Published:
                 $action['can_update'] = true;
-                $action['name'] = 'Complete Examination';
+                $action['name'] = 'Finalize & complete';
                 $action['route'] = route('instructor.exams.complete', $exam->id);
                 break;
             default:
@@ -72,6 +73,10 @@ class ExamsController extends Controller
 
     public function complete(Exam $exam): RedirectResponse
     {
+        $exam->status = ExamStatus::Completed;
+        $exam->completed_date = Carbon::now();
+        $exam->save();
+
         return redirect()->route('admin.instructors.exams');
     }
 
@@ -79,14 +84,14 @@ class ExamsController extends Controller
     {
         $exam->status = ExamStatus::Published;
         $exam->published_date = Carbon::now();
-        // $exam->save();
+        $exam->save();
 
         $students = $exam->course->students;
         foreach ($students as $student) {
-            // TODO :: Notify students with published exam detail
+            $student->user->notify(new ExamScheduleNotification($exam));
         }
 
-        return redirect()->route('admin.instructors.exams');
+        return redirect()->route('instructor.exams');
     }
 
     public function getDataTable(): JsonResponse

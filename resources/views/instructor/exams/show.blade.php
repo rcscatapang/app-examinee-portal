@@ -29,17 +29,17 @@
                         </div>
                         <div class="card-body">
                             <dl class="row">
-                                <dt class="col-sm-3">Code</dt>
-                                <dd class="col-sm-9">{{ $exam->code }}</dd>
+                                <dt class="col-sm-3">Code / Type</dt>
+                                <dd class="col-sm-9">{{ $exam->code }} / {{ $exam->type }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
                                 <dd class="col-sm-9">{{ $exam->start_date }} - {{ $exam->end_date }}</dd>
                                 <dt class="col-sm-3">Status</dt>
                                 <dd class="col-sm-9">{{ $exam->status_description }}</dd>
-                                @if($status === \App\Enums\ExamStatus::Published)
+                                @if($exam->status === \App\Enums\ExamStatus::Published)
                                     <dt class="col-sm-3">Published Date</dt>
                                     <dd class="col-sm-9">{{ $exam->published_date }}</dd>
                                 @endif
-                                @if($status === \App\Enums\ExamStatus::Completed)
+                                @if($exam->status === \App\Enums\ExamStatus::Completed)
                                     <dt class="col-sm-3">Completed Date</dt>
                                     <dd class="col-sm-9">{{ $exam->completed_date }}</dd>
                                 @endif
@@ -51,7 +51,7 @@
                                 <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
                                     @csrf
                                     <button class="btn btn-icon btn-primary" type="submit">
-                                        <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                        <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
                                         <span class="btn-inner--text">{{ $action['name'] }}</span>
                                     </button>
                                 </form>

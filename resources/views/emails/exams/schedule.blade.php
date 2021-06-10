@@ -1,12 +1,7 @@
 @component('mail::message')
-# Introduction
+# Hello! <br><br>
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+Exam code/type: <b>{{ $exam->code }}/{{ $exam->type }}</b><br>
+Examination date: <b>{{ $exam->start_date }} - {{ $exam->end_date }}</b><br>
+Description: <b>{{ $exam->description }}</b>
 @endcomponent

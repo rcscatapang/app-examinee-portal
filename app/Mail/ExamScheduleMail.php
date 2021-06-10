@@ -13,8 +13,8 @@ class ExamScheduleMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    private $exam;
-    private $user;
+    public $exam;
+    public $user;
 
     public function __construct(Exam $exam, User $user)
     {
