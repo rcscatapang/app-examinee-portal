@@ -32,11 +32,31 @@
                                   role="form" id="form-data">
                                 @csrf
                                 <div class="form-group row mb-2">
+                                    <label for="form-course" class="col-md-2 col-form-label form-control-label">
+                                        Course
+                                    </label>
+                                    <div class="col-md-10">
+                                        @if(count($courses) > 0)
+                                            <select class="form-control" id="form-course" name="course_id">
+                                                @foreach($courses as $course)
+                                                    <option value="{{ $course->id }}">
+                                                        {{ ucwords($course->name) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <label class="col-form-label form-control-label">
+                                                No course available —
+                                            </label>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
                                     <label for="form-type" class="col-md-2 col-form-label form-control-label">
                                         Exam Type
                                     </label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="form-type" name="type">
+                                        <input class="form-control" type="text" id="form-type" name="type" required>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-2">
@@ -45,7 +65,7 @@
                                     </label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="datetime-local" id="form-start-date"
-                                               name="start_date">
+                                               name="start_date" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -54,20 +74,22 @@
                                     </label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="datetime-local" id="form-end-date"
-                                               name="end_date">
+                                               name="end_date" required>
                                     </div>
                                 </div>
                                 <div class="form-group pt-2">
                                     <label class="form-control-label" for="form-description">
                                         Exam Description
                                     </label>
-                                    <textarea class="form-control" id="form-description" name="description" required
+                                    <textarea class="form-control" id="form-description" name="description"
                                               rows="3"></textarea>
                                 </div>
 
-                                <button class="btn btn-primary btn-block mt-4" type="submit">
-                                    Submit
-                                </button>
+                                @if(count($courses) > 0)
+                                    <button class="btn btn-primary btn-block mt-4" type="submit">
+                                        Submit
+                                    </button>
+                                @endif
                             </form>
                         </div>
                     </div>

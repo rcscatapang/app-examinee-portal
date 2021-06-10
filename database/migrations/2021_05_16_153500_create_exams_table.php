@@ -21,9 +21,9 @@ class CreateExamsTable extends Migration
             $table->integer('total_questions')->default(0);
             $table->timestamp('start_date');
             $table->timestamp('end_date');
-            $table->timestamp('published_date');
-            $table->timestamp('completed_date');
-            $table->integer('status');
+            $table->timestamp('published_date')->nullable();
+            $table->timestamp('completed_date')->nullable();
+            $table->integer('status')->default(\App\Enums\ExamStatus::Draft);
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('instructor_id')->constrained('instructors');
             $table->softDeletes();

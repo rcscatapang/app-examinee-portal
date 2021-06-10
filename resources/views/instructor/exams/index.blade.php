@@ -15,14 +15,7 @@
 @stop
 
 @section('content')
-    <div class="col">
-        <a href="{{ route('instructor.exams.create') }}" class="btn btn-icon btn-secondary">
-            <span class="btn-inner--icon"><i class="ni ni-folder-17"></i></span>
-            <span class="btn-inner--text">Create New Exam</span>
-        </a>
-    </div>
-
-    <div class="col-md-12 pt-2">
+    <div class="col-md-12">
         <div class="card-wrapper">
             <div class="card">
                 <div class="card-header">
@@ -41,6 +34,12 @@
                         {{-- Render data list from DataTables --}}
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer py-2">
+                    <a href="{{ route('instructor.exams.create') }}" class="btn btn-md btn-primary text-white">
+                        <span class="btn-inner--icon mr-2"><i class="fas fa-plus"></i></span>
+                        Create New
+                    </a>
                 </div>
             </div>
         </div>

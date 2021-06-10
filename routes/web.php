@@ -38,11 +38,12 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
     Route::get('exams/{exam}', [Instructor\ExamsController::class, 'show'])->name('exams.show');
     Route::get('exams/{exam}/edit', [Instructor\ExamsController::class, 'edit'])->name('exams.edit');
     Route::post('exams/{exam}/update', [Instructor\ExamsController::class, 'update'])->name('exams.update');
-    Route::post('exams/{exam}/publish', [Instructor\ExamsController::class, 'update'])->name('exams.publish');
+    Route::post('exams/{exam}/complete', [Instructor\ExamsController::class, 'complete'])->name('exams.complete');
+    Route::post('exams/{exam}/publish', [Instructor\ExamsController::class, 'publish'])->name('exams.publish');
 
     // DataTables management
+    Route::get('data-tables/exams', [Instructor\ExamsController::class, 'getDataTable'])->name('dataTable.exams');
     Route::get('data-tables/students', [Instructor\StudentsController::class, 'getDataTable'])->name('dataTable.students');
-
 });
 
 Route::middleware(['web.student'])->group(function () {

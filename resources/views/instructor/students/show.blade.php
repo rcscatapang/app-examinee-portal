@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li class="breadcrumb-item text-white">
-                <a href="{{ route('instructor.students') }}"> Students </a>
+                <a href="{{ route('instructor.students') }}"> Student Management </a>
             </li>
             <li class="breadcrumb-item text-white-50">View</li>
         </ol>
