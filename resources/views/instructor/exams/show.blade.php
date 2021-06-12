@@ -29,8 +29,8 @@
                         </div>
                         <div class="card-body">
                             <dl class="row">
-                                <dt class="col-sm-3">Code / Type</dt>
-                                <dd class="col-sm-9">{{ $exam->code }} / {{ $exam->type }}</dd>
+                                <dt class="col-sm-3">Exam Type / Code</dt>
+                                <dd class="col-sm-9">{{ $exam->type }} / {{ $exam->code }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
                                 <dd class="col-sm-9">{{ $exam->start_date }} - {{ $exam->end_date }}</dd>
                                 <dt class="col-sm-3">Status</dt>

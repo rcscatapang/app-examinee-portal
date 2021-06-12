@@ -27,7 +27,20 @@ class ExamsController extends Controller
 
     public function show(Exam $exam)
     {
-        return view('student.exams.show', compact(['exam']));
+        $exam->status_description = ExamStatus::getDescription($exam->status);
+        switch ($exam->status) {
+            case ExamStatus::Published:
+                $question = $exam->questions->first();
+                $action['can_update'] = true;
+                $action['name'] = 'Start Exam';
+                $action['route'] = route('exams.answer', [$exam->id]); // TODO :: Include first question id
+                break;
+            default:
+                $action['can_update'] = false;
+                $action['route'] = null;
+                break;
+        }
+        return view('student.exams.show', compact(['action', 'exam']));
     }
 
     public function answer(Exam $exam, Question $question)
