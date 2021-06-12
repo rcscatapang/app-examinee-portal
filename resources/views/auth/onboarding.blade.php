@@ -25,7 +25,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('onboarding.complete') }}" id="form" role="form">
+                    <form method="post" action="{{ route('onboarding.complete') }}" id="form" role="form"
+                          enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <input type="hidden" name="user_type" value="{{ $user->user_type }}">
@@ -92,6 +93,31 @@
                                     <label class="form-control-label" for="form-email-address">Email Address</label>
                                     <input type="email" class="form-control" id="form-email-address" name="email"
                                            value="{{ $user->email }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="form-birthday">Birthday</label>
+                                    <input class="form-control" type="date" id="form-birthday" name="birthday">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="form-gender">Gender</label>
+                                    <select class="form-control" id="form-gender" name="gender" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <label class="form-control-label">Upload Account Photo</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="form-photo" lang="en" required
+                                           name="file" accept="image/png, image/jpeg">
+                                    <label class="custom-file-label" for="form-photo"></label>
                                 </div>
                             </div>
                         </div>

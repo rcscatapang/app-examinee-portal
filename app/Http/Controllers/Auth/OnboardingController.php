@@ -36,6 +36,11 @@ class OnboardingController extends Controller
         $user->account_verified_at = Carbon::now();
         $user->save();
 
+        if ($request->hasFile('file')) {
+            $request->file->store('student', 'public');
+            $input['photo'] = $request->file->hashName();
+        }
+
         switch ($input['user_type']) {
             case UserType::Student:
                 Student::create($input);
