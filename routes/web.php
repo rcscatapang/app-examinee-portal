@@ -41,6 +41,8 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
     Route::post('exams/{exam}/complete', [Instructor\ExamsController::class, 'complete'])->name('exams.complete');
     Route::post('exams/{exam}/publish', [Instructor\ExamsController::class, 'publish'])->name('exams.publish');
 
+    Route::get('exams/{exam_detail}/detail', [Instructor\ExamDetailsController::class, 'show'])->name('examDetails.show');
+
     // DataTables management
     Route::get('data-tables/exams', [Instructor\ExamsController::class, 'getDataTable'])->name('dataTable.exams');
     Route::get('data-tables/students', [Instructor\StudentsController::class, 'getDataTable'])->name('dataTable.students');

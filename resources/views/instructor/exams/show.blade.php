@@ -62,7 +62,7 @@
                     @if($exam->status === \App\Enums\ExamStatus::Draft)
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="mb-0 font-weight-900">Prepare Examination</h3>
+                                <h3 class="mb-0 font-weight-900">Setup Exam</h3>
                             </div>
                             <div class="card-body">
                                 <div>
@@ -71,6 +71,29 @@
                                         Add Question
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($exam->status === \App\Enums\ExamStatus::Published)
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="mb-0 font-weight-900">Manage Students</h3>
+                            </div>
+                            <div class="card-body">
+                                @foreach($students as $student)
+                                    <li class="ml-4">
+                                        <span>{{ $student->code }} - {{ ucwords($student->full_name) }} - </span>
+                                        @if(!isset($student->exam_detail))
+                                            <span class="font-italic text-muted">{{ $student->exam_status }}</span>
+                                        @else
+                                            <a href="{{ route('instructor.examDetails.show', $student->exam_detail->id) }}"
+                                               class="text-body">
+                                                <span class="font-italic text-muted">{{ $student->exam_status }}</span>
+                                            </a>
+                                        @endif
+                                    </li>
+                                @endforeach
                             </div>
                         </div>
                     @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
+use App\Enums\ExamDetailStatus;
 use App\Enums\ExamStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
@@ -43,6 +44,11 @@ class ExamsController extends Controller
     public function show(Exam $exam)
     {
         $exam->status_description = ExamStatus::getDescription($exam->status);
+
+        $action['can_update'] = false;
+        $action['route'] = null;
+
+        $students = new \stdClass();
         switch ($exam->status) {
             case ExamStatus::Draft:
                 $action['can_update'] = true;
@@ -50,17 +56,29 @@ class ExamsController extends Controller
                 $action['route'] = route('instructor.exams.publish', $exam->id);
                 break;
             case ExamStatus::Published:
-                $action['can_update'] = true;
-                $action['name'] = 'Finalize & complete';
-                $action['route'] = route('instructor.exams.complete', $exam->id);
-                break;
-            default:
-                $action['can_update'] = false;
-                $action['route'] = null;
+                $completed = $exam->examDetails->where('status', ExamDetailStatus::Submitted)->count();
+                $students = $exam->course->students;
+
+                foreach ($students as $student) {
+                    $exam_detail = $student->examDetails->where('exam_id', $exam->id)->first();
+                    if ($exam_detail) {
+                        $student->exam_status = ExamDetailStatus::getDescription($exam_detail->status);
+                        $student->exam_detail = $exam_detail;
+                    } else {
+                        $student->exam_status = 'Not started';
+                    }
+                }
+
+                $complete_exam = Carbon::now() >= $exam->end_date;
+                if (count($students) === $completed || $complete_exam) {
+                    $action['can_update'] = true;
+                    $action['name'] = 'Finalize & complete';
+                    $action['route'] = route('instructor.exams.complete', $exam->id);
+                }
                 break;
         }
 
-        return view('instructor.exams.show', compact(['action', 'exam']));
+        return view('instructor.exams.show', compact(['action', 'exam', 'students']));
     }
 
     public function edit()
