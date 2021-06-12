@@ -42,6 +42,7 @@
                             <h3 class="mb-0 font-weight-900">Enrolled Students</h3>
                         </div>
                         <div class="card-body">
+                            {{-- TODO :: Add ul style --}}
                             @forelse($students as $student)
                                 <li class="ml-4">
                                     <a href="{{ route('instructor.students.show', $student->id) }}" class="text-muted">

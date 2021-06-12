@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\ExamDetail;
 use App\Models\Question;
+use App\Traits\ManagesQuotes;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,8 @@ use Illuminate\Support\Str;
 
 class ExamsController extends Controller
 {
+    use ManagesQuotes;
+
     public function index()
     {
         $student = auth()->user()->student;
@@ -69,9 +72,10 @@ class ExamsController extends Controller
     public function answer(ExamDetail $exam_detail, Question $question)
     {
         $exam = $exam_detail->exam;
+        $quote = $this->getQuote();
 
         $action['next'] = route('exams.submit', [$exam->id]);
-        return view('student.exams.question', compact(['action', 'exam', 'exam_detail']));
+        return view('student.exams.question', compact(['action', 'exam', 'exam_detail', 'quote']));
     }
 
     public function submit(ExamDetail $exam_detail, Question $question, Request $request): RedirectResponse

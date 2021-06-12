@@ -24,7 +24,7 @@
             <div class="col">
                 <div class="card-wrapper">
                     <div class="card">
-                        <form method="post" action="{{ $exam->id }}">
+                        <form method="post" action="{{ $action['next'] }}">
                             <div class="card-body">
                                 Lorem ipsum
                             </div>
@@ -35,6 +35,11 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                    <div class="text-center px-7">
+                        <i class="fas fa-quote-left"></i>
+                        <span class="mx-2 h2">{{ $quote }}</span>
+                        <i class="fas fa-quote-right"></i>
                     </div>
                 </div>
             </div>
