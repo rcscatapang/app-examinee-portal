@@ -60,7 +60,8 @@ Route::middleware(['web.student'])->group(function () {
     // Examinations
     Route::get('exams', [Student\ExamsController::class, 'index'])->name('exams');
     Route::get('exams/{exam}', [Student\ExamsController::class, 'show'])->name('exams.show');
-    Route::get('exams/{exam}/answer/{question?}', [Student\ExamsController::class, 'answer'])->name('exams.answer');
-    Route::post('exams/{exam}/submit', [Student\ExamsController::class, 'submit'])->name('exams.submit');
-    Route::post('exams/{exam}/complete', [Student\ExamsController::class, 'complete'])->name('exams.complete');
+    Route::post('exams/{exam}/start', [Student\ExamsController::class, 'start'])->name('exams.start');
+    Route::get('exams/{exam_detail}/answer/{question?}', [Student\ExamsController::class, 'answer'])->name('exams.answer');
+    Route::post('exams/{exam_detail}/submit', [Student\ExamsController::class, 'submit'])->name('exams.submit');
+    Route::post('exams/{exam_detail}/complete', [Student\ExamsController::class, 'complete'])->name('exams.complete');
 });

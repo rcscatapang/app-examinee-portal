@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->text('question');
             $table->text('referenced_file')->nullable();
+            $table->integer('order')->default(1);
             $table->foreignId('exam_id')->constrained('exams');
             $table->softDeletes();
             $table->timestamps();

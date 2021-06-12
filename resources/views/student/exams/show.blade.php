@@ -33,12 +33,6 @@
                                 <dd class="col-sm-9">{{ $exam->type }} / {{ $exam->code }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
                                 <dd class="col-sm-9">{{ $exam->start_date }} - {{ $exam->end_date }}</dd>
-                                <dt class="col-sm-3">Status</dt>
-                                <dd class="col-sm-9">{{ $exam->status_description }}</dd>
-                                @if($exam->status === \App\Enums\ExamStatus::Published)
-                                    <dt class="col-sm-3">Published Date</dt>
-                                    <dd class="col-sm-9">{{ $exam->published_date }}</dd>
-                                @endif
                                 @if($exam->status === \App\Enums\ExamStatus::Completed)
                                     <dt class="col-sm-3">Completed Date</dt>
                                     <dd class="col-sm-9">{{ $exam->completed_date }}</dd>

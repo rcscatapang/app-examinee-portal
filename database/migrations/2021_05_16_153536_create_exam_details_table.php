@@ -15,7 +15,7 @@ class CreateExamDetailsTable extends Migration
     {
         Schema::create('exam_details', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->integer('exam_score')->default(0);
             $table->integer('exam_result')->default(0);
             $table->timestamp('date_completed')->nullable();
