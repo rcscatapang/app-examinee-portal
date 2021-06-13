@@ -75,6 +75,7 @@
                     },
                     order: ['2', 'desc'],
                     columns: [
+                        {data: 'photo_column', name: 'photo_column', orderable: false, searchable: false},
                         {data: 'code', name: 'code'},
                         {data: 'first_name', name: 'first_name'},
                         {data: 'last_name', name: 'last_name'},

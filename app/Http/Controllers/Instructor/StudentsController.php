@@ -14,7 +14,7 @@ class StudentsController extends Controller
 {
     public function index()
     {
-        $table_headers = ['student code', 'first name', 'last name', 'email', 'contact number', 'gender', ''];
+        $table_headers = ['', 'student code', 'first name', 'last name', 'email', 'contact number', 'gender', ''];
         return view('instructor.students.index', compact(['table_headers']));
     }
 
@@ -42,7 +42,14 @@ class StudentsController extends Controller
                     return '<a href="' . $route . '" class="table-action"><i class="fas fa-chevron-right"></i></a>';
                 }
             )
-            ->rawColumns(['action_column'])
+            ->addColumn(
+                'photo_column',
+                function ($student) {
+                    $photo = '<img src="' . asset('/student/' . $student->photo) . '">';
+                    return '<a href="#!" class="avatar avatar-sm rounded-circle">' . $photo . '</a>';
+                }
+            )
+            ->rawColumns(['action_column', 'photo_column'])
             ->toJson();
     }
 }

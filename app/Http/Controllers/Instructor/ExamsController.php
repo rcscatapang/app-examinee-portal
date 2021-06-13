@@ -51,9 +51,11 @@ class ExamsController extends Controller
         $students = new \stdClass();
         switch ($exam->status) {
             case ExamStatus::Draft:
-                $action['can_update'] = true;
-                $action['name'] = 'Publish & notify students';
-                $action['route'] = route('instructor.exams.publish', $exam->id);
+                if (count($exam->questions) > 0) {
+                    $action['can_update'] = true;
+                    $action['name'] = 'Publish & notify students';
+                    $action['route'] = route('instructor.exams.publish', $exam->id);
+                }
                 break;
             case ExamStatus::Published:
                 $completed = $exam->examDetails->where('status', ExamDetailStatus::Submitted)->count();
@@ -79,6 +81,12 @@ class ExamsController extends Controller
         }
 
         return view('instructor.exams.show', compact(['action', 'exam', 'students']));
+    }
+
+    public function setup(Exam $exam, Request $request)
+    {
+        $input = $request->all();
+        dd($input);
     }
 
     public function edit()
