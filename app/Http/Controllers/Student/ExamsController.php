@@ -35,6 +35,7 @@ class ExamsController extends Controller
 
     public function show(Exam $exam)
     {
+        $course = $exam->course;
         $exam->status_description = ExamStatus::getDescription($exam->status);
         $student = auth()->user()->student;
         $exam_detail = ExamDetail::where('exam_id', $exam->id)
@@ -43,6 +44,11 @@ class ExamsController extends Controller
         switch ($exam->status) {
             case ExamStatus::Published:
                 $action['can_update'] = true;
+                if ($exam_detail) {
+                    if ($exam_detail->date_completed) {
+                        $action['can_update'] = false;
+                    }
+                }
                 $action['name'] = 'Start Exam';
                 $action['route'] = route('exams.start', [$exam->id]);
                 break;
@@ -51,7 +57,7 @@ class ExamsController extends Controller
                 $action['route'] = null;
                 break;
         }
-        return view('student.exams.show', compact(['action', 'exam', 'exam_detail']));
+        return view('student.exams.show', compact(['action', 'course', 'exam', 'exam_detail']));
     }
 
     public function start(Exam $exam): RedirectResponse

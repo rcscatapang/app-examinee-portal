@@ -29,6 +29,15 @@
                         </div>
                         <div class="card-body">
                             <dl class="row">
+                                <dt class="col-sm-3">Course</dt>
+                                <dd class="col-sm-9">{{ $course->name }} - {{ $course->academic_year }}</dd>
+                                <dt class="col-sm-3">Instructor</dt>
+                                <dd class="col-sm-9">
+                                    {{ $course->instructor->full_name }} - {{ $course->instructor->institution }}
+                                </dd>
+                            </dl>
+
+                            <dl class="row">
                                 <dt class="col-sm-3">Exam Type / Code</dt>
                                 <dd class="col-sm-9">{{ $exam->type }} / {{ $exam->code }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
@@ -46,7 +55,7 @@
                             </dl>
                             <p> {{ $exam->description }} </p>
                         </div>
-                        @if($action['can_update'] && $exam_detail->date_completed == null)
+                        @if($action['can_update'])
                             <div class="card-footer">
                                 <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
                                     @csrf

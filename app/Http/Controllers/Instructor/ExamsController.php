@@ -89,10 +89,6 @@ class ExamsController extends Controller
     {
         $input = $request->except('question', '_token');
 
-        /* Update exam overview detail */
-        $exam->total_questions = count($exam->questions);
-        $exam->save();
-
         /* Create question referencing to exam */
         $question_detail = [
             'question' => $request['question'],
@@ -112,6 +108,10 @@ class ExamsController extends Controller
                 Option::create($option);
             }
         }
+
+        /* Update exam overview detail */
+        $exam->total_questions = count($exam->questions);
+        $exam->save();
 
         return redirect()->back();
     }

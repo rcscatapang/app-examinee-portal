@@ -5,16 +5,12 @@ use App\Http\Controllers\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Landing pages
-Route::get('/', function () { return view('welcome'); });
-
 // Authentication routes
 Auth::routes(['verify' => true]);
 Route::get('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class, 'onboarding'])->name('onboarding');
 Route::post('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class, 'complete'])->name('onboarding.complete');
 
 Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])->group(function () {
-
     // Dashboard
     Route::get('dashboard', Instructor\DashboardController::class)->name('dashboard');
 
@@ -50,8 +46,8 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
 });
 
 Route::middleware(['web.student'])->group(function () {
-
     // Dashboard
+    Route::get('', function () { return redirect(route('dashboard')); });
     Route::get('dashboard', Student\DashboardController::class)->name('dashboard');
 
     // Courses
