@@ -81,6 +81,7 @@
                     },
                     order: ['2', 'desc'],
                     columns: [
+                        {data: 'course.name', name: 'course.name', orderable: false},
                         {data: 'code', name: 'code'},
                         {data: 'type', name: 'type'},
                         {data: 'start_date', name: 'start_date'},

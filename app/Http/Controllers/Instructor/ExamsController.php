@@ -21,7 +21,7 @@ class ExamsController extends Controller
 {
     public function index()
     {
-        $table_headers = ['code', 'type', 'examination date', 'status', 'last updated at', ''];
+        $table_headers = ['course', 'code', 'type', 'examination date', 'status', 'last updated at', ''];
         return view('instructor.exams.index', compact(['table_headers']));
     }
 
@@ -177,7 +177,7 @@ class ExamsController extends Controller
     public function getDataTable(): JsonResponse
     {
         $instructor = auth()->user()->instructor;
-        $exams = Exam::where('instructor_id', $instructor->id);
+        $exams = Exam::with('course')->where('instructor_id', $instructor->id);
         return DataTables::eloquent($exams)
             ->addColumn(
                 'action_column',
