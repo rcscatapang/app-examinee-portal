@@ -80,20 +80,32 @@ class ExamsController extends Controller
         $action['next'] = route('exams.submit', [$exam_detail->id]);
         $action['complete'] = route('exams.complete', [$exam_detail->id]);
 
+        $student_answers = StudentAnswer::where('exam_detail_id', $exam_detail->id)
+            ->where('question_id', $question->id)->pluck('option_id')->toArray();
+
         return view(
             'student.exams.question',
-            compact(['action', 'can_complete', 'exam', 'exam_detail', 'question', 'quote'])
+            compact(['action', 'can_complete', 'exam', 'exam_detail', 'question', 'quote', 'student_answers'])
         );
     }
 
     public function submit(ExamDetail $exam_detail, Request $request): RedirectResponse
     {
-        $input = $request->except('_token', 'question_id');
+        $input = $request->except('_token', 'question_id', 'action');
         $this->saveStudentAnswer($input, $exam_detail->id, $request['question_id']);
         $this->computeExamScore($exam_detail);
 
         $question_order = Question::find($request['question_id'])->order;
-        $question = $exam_detail->exam->questions()->where('order', $question_order + 1)->first();
+        if ($request['action'] == 'next') {
+            $question = $exam_detail->exam->questions()->where('order', $question_order + 1)->first();
+        } else {
+            $question = $exam_detail->exam->questions()->where('order', $question_order - 1)->first();
+            if ($question) {
+                return redirect()->route('exams.answer', [$exam_detail->id, $question->id]);
+            }
+            return redirect()->route('exams.show', $exam_detail->exam->id);
+        }
+
         return redirect()->route('exams.answer', [$exam_detail->id, $question->id]);
     }
 
@@ -128,25 +140,10 @@ class ExamsController extends Controller
             }
         }
 
-        $exam_detail->exam_score = $this->computeExamScore($exam_detail);
+        $exam_detail->exam_score = $score;
         $exam_detail->save();
 
         return true;
-    }
-
-    public function previous(ExamDetail $exam_detail, Request $request): RedirectResponse
-    {
-        $input = $request->except('_token', 'question_id');
-        $this->saveStudentAnswer($input, $exam_detail->id, $request['question_id']);
-        $this->computeExamScore($exam_detail);
-
-        $question_order = Question::find($request['question_id'])->order;
-        if (($question_order - 1) != 0) {
-            $question = $exam_detail->exam->questions()->where('order', $question_order - 1)->first();
-            return redirect()->route('exams.answer', [$exam_detail->id, $question->id]);
-        }
-
-        return redirect()->route('exams.show', $exam_detail->exam->id);
     }
 
     public function complete(ExamDetail $exam_detail, Request $request): RedirectResponse
@@ -155,9 +152,15 @@ class ExamsController extends Controller
         $this->saveStudentAnswer($input, $exam_detail->id, $request['question_id']);
         $this->computeExamScore($exam_detail);
 
-        $exam_detail->date_completed = Carbon::now();
-        $exam_detail->status = ExamDetailStatus::Submitted;
-        $exam_detail->save();
+        if ($request['action'] != 'complete') {
+            $question_order = Question::find($request['question_id'])->order;
+            $question = $exam_detail->exam->questions()->where('order', $question_order - 1)->first();
+            return redirect()->route('exams.answer', [$exam_detail->id, $question->id]);
+        } else {
+            $exam_detail->date_completed = Carbon::now();
+            $exam_detail->status = ExamDetailStatus::Submitted;
+            $exam_detail->save();
+        }
 
         return redirect()->route('exams.show', $exam_detail->exam->id);
     }

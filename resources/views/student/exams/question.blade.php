@@ -28,7 +28,7 @@
                               action="@if($can_complete) {{ $action['complete'] }} @else {{ $action['next'] }} @endif">
                             @csrf
                             <div class="card-body user-select-none p-5">
-                                <input type="hidden" name="question_id" id="question_id" value="{{ $question->id }}">
+                                <input type="hidden" name="question_id" value="{{ $question->id }}">
                                 <div>
                                     <div>
                                         <p class="h2 border-bottom mb-4">
@@ -39,26 +39,36 @@
                                     @foreach($question->options as $key => $option)
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="check-{{ $key }}"
-                                                   name="answer-{{ $key }}" value="{{ $option->id }}">
+                                                   name="answer-{{ $key }}" value="{{ $option->id }}"
+                                                   @if(in_array($option->id ,$student_answers)) checked @endif>
                                             <label class="custom-control-label" for="check-{{ $key }}">
-                                                <p>{{ $option->option }}</p>
+                                                <p>{{ $option->option }} </p>
                                             </label>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="card-footer">
-                                @if($can_complete)
-                                    <button class="btn btn-icon float-right btn-success" type="submit">
-                                        <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                                        <span class="btn-inner--text">Complete & submit</span>
+                                <div class="float-right">
+                                    <button class="btn btn-icon btn-outline-primary" type="submit" name="action"
+                                            value="previous">
+                                        <span class="btn-inner--icon"><i class="fas fa-chevron-left"></i></span>
+                                        <span class="btn-inner--text">Previous</span>
                                     </button>
-                                @else
-                                    <button class="btn btn-icon float-right btn-primary" type="submit">
-                                        <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                                        <span class="btn-inner--text">Next</span>
-                                    </button>
-                                @endif
+                                    @if($can_complete)
+                                        <button class="btn btn-icon btn-success" type="submit" name="action"
+                                                value="complete">
+                                            <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
+                                            <span class="btn-inner--text">Complete & submit</span>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-icon btn-primary" type="submit" name="action"
+                                                value="next">
+                                            <span class="btn-inner--text">Next</span>
+                                            <span class="btn-inner--icon"><i class="fas fa-chevron-right"></i></span>
+                                        </button>
+                                    @endif
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                         </form>
