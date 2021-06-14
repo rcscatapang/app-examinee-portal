@@ -95,6 +95,10 @@ class ExamsController extends Controller
             'order' => $exam->total_questions + 1,
             'exam_id' => $exam->id
         ];
+        if ($request->hasFile('reference')) {
+            $request->reference->store('exam', 'public');
+            $question_detail['referenced_file'] = $request->reference->hashName();
+        }
         $question = Question::create($question_detail);
 
         foreach ($input as $key => $value) {
@@ -105,6 +109,11 @@ class ExamsController extends Controller
                     'is_correct' => isset($input['correct' . $id]),
                     'question_id' => $question->id
                 ];
+                $file = 'file' . $id;
+                if ($request->hasFile($file)) {
+                    $request->$file->store('exam', 'public');
+                    $option['referenced_file'] = $request->$file->hashName();
+                }
                 Option::create($option);
             }
         }

@@ -35,6 +35,12 @@
                                             Question #{{ $question->order }} of {{ $exam->total_questions }}
                                         </p>
                                         <p class="font-weight-500"> {{ $question->question }} </p>
+                                        @if($question->referenced_file)
+                                            <div class="my-4">
+                                                <img src="{{ asset('/exam/' . $question->referenced_file) }}"
+                                                     class="img-fluid" style="max-height: 100px;">
+                                            </div>
+                                        @endif
                                     </div>
                                     @foreach($question->options as $key => $option)
                                         <div class="custom-control custom-checkbox">
@@ -42,7 +48,14 @@
                                                    name="answer-{{ $key }}" value="{{ $option->id }}"
                                                    @if(in_array($option->id ,$student_answers)) checked @endif>
                                             <label class="custom-control-label" for="check-{{ $key }}">
-                                                <p>{{ $option->option }} </p>
+                                                <p>
+                                                    {{ $option->option }}
+                                                    @if($option->referenced_file)
+                                                        —
+                                                        <a href="{{ asset('/exam/' . $option->referenced_file) }}"
+                                                           target="_blank">View file</a>
+                                                    @endif
+                                                </p>
                                             </label>
                                         </div>
                                     @endforeach
