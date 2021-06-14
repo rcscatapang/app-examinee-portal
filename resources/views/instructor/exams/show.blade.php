@@ -116,6 +116,34 @@
                             </div>
                         </div>
                     @endif
+
+                    @if($exam->status === \App\Enums\ExamStatus::Completed)
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="mb-0 font-weight-900">Manage Students</h3>
+                            </div>
+                            <div class="card-body">
+                                @foreach($students as $student)
+                                    <li class="ml-4">
+                                        <span>{{ $student->code }} - {{ ucwords($student->full_name) }} - </span>
+                                        @if(!isset($student->exam_detail))
+                                            <span class="font-italic text-muted">{{ $student->exam_status }}</span>
+                                        @else
+                                            <a href="{{ route('instructor.examDetails.show', $student->exam_detail->id) }}"
+                                               class="text-body">
+                                                <span class="font-italic text-muted">
+                                                    {{ $student->exam_status }} —
+                                                </span>
+                                                <span>
+                                                    Score: {{ $student->exam_result }}/{{ $exam->total_questions }}
+                                                </span>
+                                            </a>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 {{-- Question Modal --}}

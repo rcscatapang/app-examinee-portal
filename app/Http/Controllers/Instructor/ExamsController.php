@@ -80,6 +80,19 @@ class ExamsController extends Controller
                     $action['route'] = route('instructor.exams.complete', $exam->id);
                 }
                 break;
+            case ExamStatus::Completed:
+                $students = $exam->course->students;
+                foreach ($students as $student) {
+                    $exam_detail = $student->examDetails->where('exam_id', $exam->id)->first();
+                    if ($exam_detail) {
+                        $student->exam_status = ExamDetailStatus::getDescription($exam_detail->status);
+                        $student->exam_result = $exam_detail->exam_result;
+                        $student->exam_detail = $exam_detail;
+                    } else {
+                        $student->exam_status = 'Not started';
+                    }
+                }
+                break;
         }
 
         return view('instructor.exams.show', compact(['action', 'exam', 'students']));
@@ -139,7 +152,12 @@ class ExamsController extends Controller
         $exam->completed_date = Carbon::now();
         $exam->save();
 
-        return redirect()->route('admin.instructors.exams');
+        foreach ($exam->examDetails as $exam_detail) {
+            $exam_detail->exam_result = $exam_detail->exam_score;
+            $exam_detail->save();
+        }
+
+        return redirect()->route('instructor.exams.show', $exam->id);
     }
 
     public function publish(Exam $exam): RedirectResponse

@@ -46,7 +46,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="check-{{ $key }}"
                                                    name="answer-{{ $key }}" value="{{ $option->id }}"
-                                                   @if(in_array($option->id ,$student_answers)) checked @endif>
+                                                   @if(in_array($option->id, $student_answers)) checked @endif>
                                             <label class="custom-control-label" for="check-{{ $key }}">
                                                 <p>
                                                     {{ $option->option }}
