@@ -7,6 +7,8 @@ use App\Enums\ExamStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Models\Option;
+use App\Models\Question;
 use App\Notifications\ExamScheduleNotification;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -83,10 +85,35 @@ class ExamsController extends Controller
         return view('instructor.exams.show', compact(['action', 'exam', 'students']));
     }
 
-    public function setup(Exam $exam, Request $request)
+    public function setup(Exam $exam, Request $request): RedirectResponse
     {
-        $input = $request->all();
-        dd($input);
+        $input = $request->except('question', '_token');
+
+        /* Update exam overview detail */
+        $exam->total_questions = count($exam->questions);
+        $exam->save();
+
+        /* Create question referencing to exam */
+        $question_detail = [
+            'question' => $request['question'],
+            'order' => $exam->total_questions + 1,
+            'exam_id' => $exam->id
+        ];
+        $question = Question::create($question_detail);
+
+        foreach ($input as $key => $value) {
+            if (strpos($key, 'answer') !== false) {
+                $id = str_replace('answer', '', $key);
+                $option = [
+                    'option' => $value,
+                    'is_correct' => isset($input['correct' . $id]),
+                    'question_id' => $question->id
+                ];
+                Option::create($option);
+            }
+        }
+
+        return redirect()->back();
     }
 
     public function edit()

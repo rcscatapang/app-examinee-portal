@@ -65,11 +65,29 @@
                                 <h3 class="mb-0 font-weight-900">Setup Exam Items</h3>
                             </div>
                             <div class="card-body">
+                                <div class="mb-5">
+                                    @if(count($exam->questions) > 0)
+                                        <div class="mb-5">
+                                            @foreach($exam->questions as $question)
+                                                <div class="mb-4">
+                                                    <span class="h3"> {{ $question->question }} </span>
+                                                    @foreach($question->options as $key => $option)
+                                                        <p class="mb-0 @if($option->is_correct) text-success @endif">
+                                                            <b>{{ $key + 1 }}.</b> {{ $option->option }}
+                                                        </p>
+                                                    @endforeach
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <h4 class="font-italic font-weight-300"> No records yet — </h4>
+                                    @endif
+                                </div>
                                 <div>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#questionModal">
                                         <span class="btn-inner--icon mr-2"><i class="fas fa-plus"></i></span>
-                                        <span class="btn-inner--text">Question</span>
+                                        <span class="btn-inner--text">Add question</span>
                                     </button>
                                 </div>
                             </div>

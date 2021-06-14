@@ -16,6 +16,7 @@ class Question extends Model
     protected $fillable = [
         'question',
         'referenced_file',
+        'order',
         'exam_id'
     ];
 

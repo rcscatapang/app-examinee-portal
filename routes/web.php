@@ -64,7 +64,8 @@ Route::middleware(['web.student'])->group(function () {
     Route::get('exams', [Student\ExamsController::class, 'index'])->name('exams');
     Route::get('exams/{exam}', [Student\ExamsController::class, 'show'])->name('exams.show');
     Route::post('exams/{exam}/start', [Student\ExamsController::class, 'start'])->name('exams.start');
-    Route::get('exams/{exam_detail}/answer/{question?}', [Student\ExamsController::class, 'answer'])->name('exams.answer');
+    Route::get('exams/{exam_detail}/answer/{question}', [Student\ExamsController::class, 'answer'])->name('exams.answer');
     Route::post('exams/{exam_detail}/submit', [Student\ExamsController::class, 'submit'])->name('exams.submit');
+    Route::post('exams/{exam_detail}/previous', [Student\ExamsController::class, 'previous'])->name('exams.previous');
     Route::post('exams/{exam_detail}/complete', [Student\ExamsController::class, 'complete'])->name('exams.complete');
 });
