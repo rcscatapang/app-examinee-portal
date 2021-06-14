@@ -33,14 +33,20 @@
                                 <dd class="col-sm-9">{{ $exam->type }} / {{ $exam->code }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
                                 <dd class="col-sm-9">{{ $exam->start_date }} - {{ $exam->end_date }}</dd>
+                                @if(isset($exam_detail))
+                                    <dt class="col-sm-3">Submitted Date</dt>
+                                    <dd class="col-sm-9">{{ $exam_detail->date_completed }}</dd>
+                                @endif
                                 @if($exam->status === \App\Enums\ExamStatus::Completed)
                                     <dt class="col-sm-3">Completed Date</dt>
                                     <dd class="col-sm-9">{{ $exam->completed_date }}</dd>
+                                    <dt class="col-sm-3">Exam Result</dt>
+                                    <dd class="col-sm-9">{{ $exam->result }}</dd>
                                 @endif
                             </dl>
                             <p> {{ $exam->description }} </p>
                         </div>
-                        @if($action['can_update'])
+                        @if($action['can_update'] && $exam_detail->date_completed == null)
                             <div class="card-footer">
                                 <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
                                     @csrf

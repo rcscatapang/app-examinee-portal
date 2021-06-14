@@ -36,6 +36,10 @@ class ExamsController extends Controller
     public function show(Exam $exam)
     {
         $exam->status_description = ExamStatus::getDescription($exam->status);
+        $student = auth()->user()->student;
+        $exam_detail = ExamDetail::where('exam_id', $exam->id)
+            ->where('student_id', $student->id)->first();
+
         switch ($exam->status) {
             case ExamStatus::Published:
                 $action['can_update'] = true;
@@ -47,7 +51,7 @@ class ExamsController extends Controller
                 $action['route'] = null;
                 break;
         }
-        return view('student.exams.show', compact(['action', 'exam']));
+        return view('student.exams.show', compact(['action', 'exam', 'exam_detail']));
     }
 
     public function start(Exam $exam): RedirectResponse
@@ -111,9 +115,9 @@ class ExamsController extends Controller
 
     protected function saveStudentAnswer($input, $exam_detail_id, $question_id): bool
     {
+        StudentAnswer::where('exam_detail_id', $exam_detail_id)->where('question_id', $question_id)->delete();
         foreach ($input as $key => $value) {
             if (strpos($key, 'answer') !== false) {
-                StudentAnswer::where('exam_detail_id', $exam_detail_id)->where('question_id', $question_id)->delete();
                 $student_answer = [
                     'exam_detail_id' => $exam_detail_id,
                     'question_id' => $question_id,
