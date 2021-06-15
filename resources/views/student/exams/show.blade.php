@@ -50,11 +50,29 @@
                                     <dt class="col-sm-3">Completed Date</dt>
                                     <dd class="col-sm-9">{{ $exam->completed_date }}</dd>
                                     <dt class="col-sm-3">Exam Result</dt>
-                                    <dd class="col-sm-9">{{ $exam->result }}</dd>
+                                    <dd class="col-sm-9">
+                                        {{ $exam_detail->exam_result }}/{{ $exam->total_questions }}
+                                    </dd>
                                 @endif
                             </dl>
                             <p> {{ $exam->description }} </p>
+
+                            @if(isset($exam_detail))
+                                @if($exam_detail->status === \App\Enums\ExamDetailStatus::Submitted && $exam->status === \App\Enums\ExamStatus::Published)
+                                    <p class="font-weight-500 font-italic text-warning">
+                                        Pending for checking & completion — Please wait for further updates.
+                                    </p>
+                                @endif
+                            @endif
                         </div>
+                        @if($exam->status === \App\Enums\ExamStatus::Completed)
+                            <div class="card-footer">
+                                <a href="{{ route('examDetails.show', $exam_detail->id) }}"
+                                   class="btn btn-icon btn-primary">
+                                    View Results
+                                </a>
+                            </div>
+                        @endif
                         @if($action['can_update'])
                             <div class="card-footer">
                                 <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
@@ -62,9 +80,9 @@
                                     @if(!isset($exam_detail))
                                         <div class="py-4">
                                             <p class="mb-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac tortor ac
-                                                diam ullamcorper imperdiet eu ac orci. Nunc at hendrerit arcu, a
-                                                scelerisque tortor.
+                                                Donec consectetur, mauris at commodo viverra, risus nunc commodo augue,
+                                                sit amet cursus arcu tellus id erat. Aliquam ac varius turpis. Praesent
+                                                nunc arcu, posuere in semper vitae, sodales vestibulum dolor.
                                             </p>
                                             <div class="form-group w-50">
                                                 <div class="custom-file">

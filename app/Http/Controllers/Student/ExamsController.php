@@ -29,8 +29,9 @@ class ExamsController extends Controller
             ->whereDate('start_date', '>', $current_date)->orderBy('start_date', 'desc')->get();
         $ongoing_exams = Exam::whereIn('course_id', $courses)->where('status', ExamStatus::Published)
             ->whereDate('start_date', '<=', $current_date)->orderBy('start_date', 'desc')->get();
+        $completed_exams = Exam::whereIn('course_id', $courses)->where('status', ExamStatus::Completed)->get();
 
-        return view('student.exams.index', compact(['upcoming_exams', 'ongoing_exams']));
+        return view('student.exams.index', compact(['upcoming_exams', 'ongoing_exams', 'completed_exams']));
     }
 
     public function show(Exam $exam)

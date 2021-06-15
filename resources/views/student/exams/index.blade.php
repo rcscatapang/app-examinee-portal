@@ -89,10 +89,39 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="mb-0 font-weight-900">Completed</h3>
-                        </div>
                         <div class="card-body">
+                            <h3 class="mb-2 font-weight-900">Completed</h3>
+                            <ul class="list-group list-group-flush list">
+                                @if(count($completed_exams) > 0)
+                                    @foreach($completed_exams as $exam)
+                                        <li class="list-group-item px-0 border-top">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <i class="fas fa-check"></i>
+                                                </div>
+                                                <div class="col">
+                                                    <a href="{{ route('exams.show', $exam->id) }}">
+                                                        <small>{{ $exam->code }} - {{ $exam->type }}</small>
+                                                    </a>
+                                                    <h5 class="mb-0">{{ $exam->course->name }}</h5>
+                                                </div>
+                                                <div class="col">
+                                                    <small>Start date:</small>
+                                                    <h5 class="mb-0">{{ $exam->start_date }}</h5>
+                                                </div>
+                                                <div class="col">
+                                                    <small>End date:</small>
+                                                    <h5 class="mb-0">{{ $exam->end_date }}</h5>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <div class="border-top">
+                                        <h4 class="font-italic font-weight-300 pt-2"> No records yet — </h4>
+                                    </div>
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>
