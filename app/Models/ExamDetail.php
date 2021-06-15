@@ -19,6 +19,7 @@ class ExamDetail extends Model
         'exam_result',
         'date_completed',
         'status',
+        'photo',
         'exam_id',
         'student_id'
     ];

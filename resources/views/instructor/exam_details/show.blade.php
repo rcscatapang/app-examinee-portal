@@ -44,6 +44,10 @@
                                     {{ $exam_detail->exam_result }}/{{ $exam->total_questions }}
                                 </dd>
                             </dl>
+                            <div>
+                                <img src="{{ asset('/student/' . $exam_detail->photo) }}" class="img-fluid"
+                                     style="max-height: 200px;">
+                            </div>
                         </div>
                     </div>
                 </div>

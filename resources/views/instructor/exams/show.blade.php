@@ -70,10 +70,11 @@
                                         <div class="mb-5">
                                             @foreach($exam->questions as $question)
                                                 <div class="mb-4">
-                                                    <span class="h3"> {{ $question->question }} </span>
+                                                    <p class="mb-0 font-weight-500">Question #{{ $question->order }}</p>
+                                                    <p> {{ $question->question }} </p>
                                                     @foreach($question->options as $key => $option)
                                                         <p class="mb-0 @if($option->is_correct) text-success @endif">
-                                                            <b>{{ $key + 1 }}.</b> {{ $option->option }}
+                                                            {{ $key + 1 }}. {{ $option->option }}
                                                         </p>
                                                     @endforeach
                                                 </div>

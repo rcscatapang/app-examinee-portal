@@ -60,7 +60,7 @@ class ExamsController extends Controller
         return view('student.exams.show', compact(['action', 'course', 'exam', 'exam_detail']));
     }
 
-    public function start(Exam $exam): RedirectResponse
+    public function start(Exam $exam, Request $request): RedirectResponse
     {
         $student = auth()->user()->student;
         $exam_detail = ExamDetail::where('exam_id', $exam->id)
@@ -73,6 +73,10 @@ class ExamsController extends Controller
                 'exam_id' => $exam->id,
                 'student_id' => $student->id
             ];
+            if ($request->hasFile('reference')) {
+                $request->reference->store('student', 'public');
+                $exam_detail['photo'] = $request->reference->hashName();
+            }
             $exam_detail = ExamDetail::create($exam_detail);
         }
 

@@ -59,6 +59,23 @@
                             <div class="card-footer">
                                 <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
                                     @csrf
+                                    @if(!isset($exam_detail))
+                                        <div class="py-4">
+                                            <p class="mb-2">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac tortor ac
+                                                diam ullamcorper imperdiet eu ac orci. Nunc at hendrerit arcu, a
+                                                scelerisque tortor.
+                                            </p>
+                                            <div class="form-group w-50">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="form-reference"
+                                                           lang="en" name="reference" accept="image/png, image/jpeg"
+                                                           required>
+                                                    <label class="custom-file-label" for="form-reference"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <button class="btn btn-icon btn-primary" type="submit">
                                         <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
                                         <span class="btn-inner--text">{{ $action['name'] }}</span>
