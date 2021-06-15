@@ -35,6 +35,8 @@
                                 <dd class="col-sm-9">{{ $exam->course->name }}</dd>
                                 <dt class="col-sm-3">Academic Year</dt>
                                 <dd class="col-sm-9">{{ $exam->course->academic_year }}</dd>
+                                <dt class="col-sm-3">Instructor</dt>
+                                <dd class="col-sm-9">{{ $instructor->full_name }} - {{ $instructor->institution }}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-sm-3">Date Completed</dt>

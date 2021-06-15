@@ -12,6 +12,7 @@ class ExamDetailsController extends Controller
     {
         $exam = $exam_detail->exam;
         $student = $exam_detail->student;
+        $instructor = $exam->instructor;
 
         $questions = $exam->questions;
         foreach ($questions as $question) {
@@ -23,6 +24,9 @@ class ExamDetailsController extends Controller
             $question->is_correct = count($diff) == 0;
         }
 
-        return view('student.exam_details.show', compact(['exam_detail', 'exam', 'questions', 'student']));
+        return view(
+            'student.exam_details.show',
+            compact(['exam_detail', 'exam', 'instructor', 'questions', 'student'])
+        );
     }
 }

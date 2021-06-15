@@ -60,7 +60,7 @@
                             @if(isset($exam_detail))
                                 @if($exam_detail->status === \App\Enums\ExamDetailStatus::Submitted && $exam->status === \App\Enums\ExamStatus::Published)
                                     <p class="font-weight-500 font-italic text-warning">
-                                        Pending for checking & completion — Please wait for further updates.
+                                        Pending for checking & completion — Please wait for further updates
                                     </p>
                                 @endif
                             @endif
@@ -75,7 +75,8 @@
                         @endif
                         @if($action['can_update'])
                             <div class="card-footer">
-                                <form method="post" action="{{ $action['route'] }}" role="form" id="form-data">
+                                <form method="post" action="{{ $action['route'] }}" role="form" id="form-data"
+                                      enctype="multipart/form-data">
                                     @csrf
                                     @if(!isset($exam_detail))
                                         <div class="py-4">
