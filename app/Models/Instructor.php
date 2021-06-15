@@ -19,7 +19,10 @@ class Instructor extends Model
         'last_name',
         'middle_name',
         'contact_number',
+        'email',
         'institution',
+        'birthday',
+        'gender',
         'photo',
         'user_id'
     ];

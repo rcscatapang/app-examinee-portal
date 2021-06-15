@@ -31,6 +31,7 @@ class InstructorUserSeeder extends Seeder
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'contact_number' => '+639171234567',
+                'email' => 'johndoe@example.com',
                 'institution' => 'Harvard University'
             ]
         );
