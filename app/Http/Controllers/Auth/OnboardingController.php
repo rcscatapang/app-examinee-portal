@@ -37,7 +37,7 @@ class OnboardingController extends Controller
         $user->save();
 
         if ($request->hasFile('file')) {
-            $request->file->store('student', 'public');
+            $request->file->store('user', 'public');
             $input['photo'] = $request->file->hashName();
         }
 

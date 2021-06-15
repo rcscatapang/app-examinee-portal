@@ -26,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
                     $app_data['courses'] = $student->courses->sortBy('name');
                 }
 
+                $instructor = $current_user->instructor;
+                if ($current_user->user_type === UserType::Instructor && $instructor) {
+                    $app_data['instructor'] = $instructor;
+                }
+
                 $view->with('app_data', $app_data);
             }
         });

@@ -20,7 +20,7 @@
             <div class="card bg-secondary border-0 mb-0">
                 <div class="card-header bg-transparent">
                     <div class="text-muted text-center mx-4 mt-3">
-                        <h3 class="mb-0">Student Registration Form</h3>
+                        <h3 class="mb-0">User Registration Form</h3>
                         <small>Fill out the form carefully to complete registration</small>
                     </div>
                 </div>

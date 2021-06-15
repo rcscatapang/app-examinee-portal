@@ -18,7 +18,11 @@
                        aria-expanded="false">
                         <div class="media align-items-center">
                             <span class="avatar avatar-sm rounded-circle">
-                                <i class="fas fa-user"></i>
+                                @if(isset($app_data['currentUser']['instructor']->photo))
+                                    <img src="{{ asset('/user/' . $app_data['currentUser']['instructor']->photo) }}">
+                                @else
+                                    <i class="fas fa-user"></i>
+                                @endif
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <span class="mb-0 text-sm font-weight-bold">

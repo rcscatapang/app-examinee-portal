@@ -45,7 +45,7 @@ class StudentsController extends Controller
             ->addColumn(
                 'photo_column',
                 function ($student) {
-                    $photo = '<img src="' . asset('/student/' . $student->photo) . '">';
+                    $photo = '<img src="' . asset('/user/' . $student->photo) . '">';
                     return '<a href="#!" class="avatar avatar-sm rounded-circle">' . $photo . '</a>';
                 }
             )

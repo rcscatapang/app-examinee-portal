@@ -19,7 +19,7 @@
                         <div class="media align-items-center">
                             <span class="avatar avatar-sm rounded-circle">
                                 @if(isset($app_data['currentUser']['student']->photo))
-                                    <img src="{{ asset('/student/' . $app_data['currentUser']['student']->photo) }}">
+                                    <img src="{{ asset('/user/' . $app_data['currentUser']['student']->photo) }}">
                                 @else
                                     <i class="fas fa-user"></i>
                                 @endif
