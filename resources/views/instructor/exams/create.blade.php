@@ -60,6 +60,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-2">
+                                    <label for="form-link" class="col-md-2 col-form-label form-control-label">
+                                        Video Meet Link
+                                    </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="text" id="form-link" name="link">
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
                                     <label for="form-start-date" class="col-md-2 col-form-label form-control-label">
                                         Start Date
                                     </label>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ExamStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ class Exam extends Model
     protected $fillable = [
         'code',
         'type',
+        'link',
         'description',
         'total_questions',
         'start_date',
@@ -26,6 +28,11 @@ class Exam extends Model
         'course_id',
         'instructor_id'
     ];
+
+    public function getStatusDescriptionAttribute(): string
+    {
+        return ExamStatus::getDescription($this->status);
+    }
 
     public function course(): BelongsTo
     {

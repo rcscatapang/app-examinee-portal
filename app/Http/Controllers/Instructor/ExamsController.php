@@ -179,6 +179,9 @@ class ExamsController extends Controller
         $instructor = auth()->user()->instructor;
         $exams = Exam::with('course')->where('instructor_id', $instructor->id);
         return DataTables::eloquent($exams)
+            ->addColumn('status_description', function ($exam) {
+                return $exam->statusDescription;
+            })
             ->addColumn(
                 'action_column',
                 function ($exam) {

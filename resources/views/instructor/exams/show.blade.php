@@ -33,6 +33,14 @@
                                 <dd class="col-sm-9">{{ $exam->type }} / {{ $exam->code }}</dd>
                                 <dt class="col-sm-3">Examination Date</dt>
                                 <dd class="col-sm-9">{{ $exam->start_date }} - {{ $exam->end_date }}</dd>
+                                <dt class="col-sm-3">Video Meet Link</dt>
+                                <dd class="col-sm-9">
+                                    @if($exam->link)
+                                        <a href="{{ $exam->link }}" target="_blank"> {{ $exam->link }} </a>
+                                    @else
+                                        —
+                                    @endif
+                                </dd>
                                 <dt class="col-sm-3">Status</dt>
                                 <dd class="col-sm-9">{{ $exam->status_description }}</dd>
                                 @if($exam->status === \App\Enums\ExamStatus::Published)

@@ -25,7 +25,7 @@
     @include('layouts.student.side_navigation')
 
     <div class="main-content" id="panel">
-        <div class="bg-blue">
+        <div style="background-color: #AAE192 !important;">
             @include('layouts.student.top_navigation')
             @include('layouts.student.header')
         </div>
@@ -48,13 +48,6 @@
     <script src="{{ asset('vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
     {{--Custom Page Scripts--}}
     <script src="{{ asset('js/argon.js?v=1.0.0') }}"></script>
-    <script>
-        $(document).ready(function () {
-            @if(session()->has('has_product_below_threshold'))
-            $('#modalProductBelowThreshold').modal('show');
-            @endif
-        });
-    </script>
     @yield('scripts')
 
     </body>

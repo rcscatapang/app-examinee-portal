@@ -85,7 +85,7 @@
                         {data: 'code', name: 'code'},
                         {data: 'type', name: 'type'},
                         {data: 'start_date', name: 'start_date'},
-                        {data: 'status', name: 'status', orderable: false},
+                        {data: 'status_description', name: 'status_description', orderable: false, searchable: false},
                         {data: 'updated_at', name: 'updated_at'},
                         {data: 'action_column', name: 'action_column', orderable: false, searchable: false},
                     ],

@@ -17,6 +17,7 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('type');
+            $table->string('link');
             $table->text('description');
             $table->integer('total_questions')->default(0);
             $table->timestamp('start_date');

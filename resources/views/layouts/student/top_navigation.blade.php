@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-blue">
+<nav class="navbar navbar-top navbar-expand navbar-dark" style="background-color: #AAE192 !important;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav align-items-center ml-md-auto"></ul>
