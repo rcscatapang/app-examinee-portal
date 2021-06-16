@@ -88,10 +88,14 @@
                                     @csrf
                                     @if(!isset($exam_detail))
                                         <div class="py-4">
+                                            <p>
+                                                Please answer the exam within the said time allotment. Failure to do so
+                                                will result to automatically exiting the exam page. Kindly tick the
+                                                circle of the correct answer.
+                                            </p>
                                             <p class="mb-2">
-                                                Donec consectetur, mauris at commodo viverra, risus nunc commodo augue,
-                                                sit amet cursus arcu tellus id erat. Aliquam ac varius turpis. Praesent
-                                                nunc arcu, posuere in semper vitae, sodales vestibulum dolor.
+                                                Additionally, please take a photo of your workspace and kindly upload
+                                                before starting the exam.
                                             </p>
                                             <div class="form-group w-50">
                                                 <div class="custom-file">
