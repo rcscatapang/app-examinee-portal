@@ -53,6 +53,13 @@
                                 @endif
                             </dl>
                             <p> {{ $exam->description }} </p>
+                            @if($exam->status === \App\Enums\ExamStatus::Completed)
+                                <a class="btn btn-icon btn-primary"
+                                   href="{{ route('instructor.exams.export', $exam->id) }}">
+                                    <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
+                                    <span class="btn-inner--text">Export Results</span>
+                                </a>
+                            @endif
                         </div>
                         @if($action['can_update'])
                             <div class="card-footer">

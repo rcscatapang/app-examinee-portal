@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Instructor;
 
 use App\Enums\ExamDetailStatus;
 use App\Enums\ExamStatus;
+use App\Exports\ExamResultsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
@@ -15,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ExamsController extends Controller
@@ -174,14 +176,22 @@ class ExamsController extends Controller
         return redirect()->route('instructor.exams');
     }
 
+    public function export(Exam $exam)
+    {
+        return Excel::download(new ExamResultsExport($exam), "{$exam->code}-RESULTS.xlsx");
+    }
+
     public function getDataTable(): JsonResponse
     {
         $instructor = auth()->user()->instructor;
         $exams = Exam::with('course')->where('instructor_id', $instructor->id);
         return DataTables::eloquent($exams)
-            ->addColumn('status_description', function ($exam) {
-                return $exam->statusDescription;
-            })
+            ->addColumn(
+                'status_description',
+                function ($exam) {
+                    return $exam->statusDescription;
+                }
+            )
             ->addColumn(
                 'action_column',
                 function ($exam) {

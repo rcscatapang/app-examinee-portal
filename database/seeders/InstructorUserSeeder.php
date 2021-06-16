@@ -16,7 +16,7 @@ class InstructorUserSeeder extends Seeder
         $user = User::create(
             [
                 'name' => 'John Doe',
-                'email' => 'johndoe@example.com',
+                'email' => 'halaexaminee.app@gmail.com',
                 'password' => Hash::make('secret'),
                 'user_type' => UserType::Instructor,
                 'account_verified_at' => Carbon::now(),
@@ -31,7 +31,7 @@ class InstructorUserSeeder extends Seeder
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'contact_number' => '+639171234567',
-                'email' => 'johndoe@example.com',
+                'email' => 'halaexaminee.app@gmail.com',
                 'institution' => 'Harvard University'
             ]
         );
