@@ -42,6 +42,11 @@
                                 <dt class="col-sm-3">Score</dt>
                                 <dd class="col-sm-9">
                                     {{ $exam_detail->exam_result }}/{{ $exam->total_questions }}
+                                    @if($exam_detail->additional_points)
+                                        <span class="text-success">
+                                            ({{ $exam_detail->exam_score . ' + '. $exam_detail->additional_points }}pts)
+                                        </span>
+                                    @endif
                                 </dd>
                             </dl>
                             <div>

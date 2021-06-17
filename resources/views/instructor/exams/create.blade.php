@@ -93,6 +93,35 @@
                                               rows="3"></textarea>
                                 </div>
 
+                                <hr>
+                                <div class="pb-4">
+                                    <p class="font-weight-600 h4">Optional:</p>
+                                    <span>
+                                        Give additional points to students passing the exam ahead of time. Please
+                                        provide how many additional points to be given at a certain minute after exam
+                                        has started.
+                                    </span>
+                                </div>
+
+                                <div class="form-group row mb-2">
+                                    <label for="form-additional" class="col-md-2 col-form-label form-control-label">
+                                        Additional Points
+                                    </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="number" id="form-additional"
+                                               name="additional_points">
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="form-minutes" class="col-md-2 col-form-label form-control-label">
+                                        In minute
+                                    </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="number" id="form-finish_in_minutes"
+                                               name="finish_in_minutes">
+                                    </div>
+                                </div>
+
                                 @if(count($courses) > 0)
                                     <button class="btn btn-primary btn-block mt-4" type="submit">
                                         Submit

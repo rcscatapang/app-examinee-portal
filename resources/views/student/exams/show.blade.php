@@ -60,10 +60,21 @@
                                     <dt class="col-sm-3">Exam Result</dt>
                                     <dd class="col-sm-9">
                                         {{ $exam_detail->exam_result }}/{{ $exam->total_questions }}
+                                        @if($exam_detail->additional_points)
+                                            <span class="text-success">
+                                            ({{ $exam_detail->exam_score . ' + '. $exam_detail->additional_points }}pts)
+                                        </span>
+                                        @endif
                                     </dd>
                                 @endif
                             </dl>
                             <p> {{ $exam->description }} </p>
+                            @if($exam->additional_points && $exam->additional_points > 0)
+                                <p class="mt--2 font-italic text-muted">
+                                    * Additional {{ $exam->additional_points }}pts will be given if you
+                                    submitted {{ $exam->finish_in_minutes }} minutes after exam started
+                                </p>
+                            @endif
 
                             @if(isset($exam_detail))
                                 @if($exam_detail->status === \App\Enums\ExamDetailStatus::Submitted && $exam->status === \App\Enums\ExamStatus::Published)

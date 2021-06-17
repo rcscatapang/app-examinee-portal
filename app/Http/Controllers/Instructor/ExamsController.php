@@ -166,12 +166,29 @@ class ExamsController extends Controller
 
     public function complete(Exam $exam): RedirectResponse
     {
+        $apply_additional_score = false;
+        if ($exam->additional_points && $exam->additional_points > 0 && $exam->finish_in_minutes) {
+            $apply_additional_score = true;
+        }
+
         $exam->status = ExamStatus::Completed;
         $exam->completed_date = Carbon::now();
         $exam->save();
 
         foreach ($exam->examDetails as $exam_detail) {
-            $exam_detail->exam_result = $exam_detail->exam_score;
+            $additional_points = 0;
+            if ($apply_additional_score) {
+                $date = Carbon::parse($exam->start_date)->addMinutes($exam->additional_points);
+                if (($exam_detail->date_completed >= $exam->start_date) && ($exam_detail->date_completed <= $date)) {
+                    $additional_points = $exam->additional_points;
+                    $exam_detail->additional_points = $additional_points;
+                }
+            }
+
+            $exam_detail->exam_result = $exam_detail->exam_score + $additional_points;
+            if ($exam_detail->exam_result > $exam->total_questions) {
+                $exam_detail->exam_result = $exam->total_questions;
+            }
             $exam_detail->save();
         }
 

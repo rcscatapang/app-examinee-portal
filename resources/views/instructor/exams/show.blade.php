@@ -41,6 +41,13 @@
                                         —
                                     @endif
                                 </dd>
+                                @if($exam->additional_points && $exam->additional_points > 0)
+                                    <dt class="col-sm-3">Additional Points</dt>
+                                    <dd class="col-sm-9">
+                                        {{ $exam->additional_points }}pts will be given if student
+                                        submitted {{ $exam->finish_in_minutes }} minutes after exam started
+                                    </dd>
+                                @endif
                                 <dt class="col-sm-3">Status</dt>
                                 <dd class="col-sm-9">{{ $exam->status_description }}</dd>
                                 @if($exam->status === \App\Enums\ExamStatus::Published)
@@ -162,6 +169,11 @@
                                                 </span>
                                                 <span>
                                                     Score: {{ $student->exam_result }}/{{ $exam->total_questions }}
+                                                    @if($student->exam_detail->additional_points)
+                                                        <span class="text-success">
+                                                            ({{ $student->exam_detail->exam_score . ' + '. $student->exam_detail->additional_points }}pts)
+                                                        </span>
+                                                    @endif
                                                 </span>
                                             </a>
                                         @endif
