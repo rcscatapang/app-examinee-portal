@@ -13,9 +13,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link pr-0" href="{{ route('profile') }}">
                         <div class="media align-items-center">
                             <span class="avatar avatar-sm rounded-circle">
                                 @if(isset($app_data['currentUser']['student']->photo))

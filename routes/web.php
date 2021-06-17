@@ -11,8 +11,9 @@ Route::get('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class
 Route::post('onboarding', [\App\Http\Controllers\Auth\OnboardingController::class, 'complete'])->name('onboarding.complete');
 
 Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])->group(function () {
-    // Dashboard
+    // Pages
     Route::get('dashboard', Instructor\DashboardController::class)->name('dashboard');
+    Route::get('profile', [Instructor\UsersController::class, 'profile'])->name('profile');
 
     // Course management
     Route::get('courses', [Instructor\CoursesController::class, 'index'])->name('courses');
@@ -47,9 +48,10 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
 });
 
 Route::middleware(['web.student'])->group(function () {
-    // Dashboard
+    // Pages
     Route::get('', function () { return redirect(route('dashboard')); });
     Route::get('dashboard', Student\DashboardController::class)->name('dashboard');
+    Route::get('profile', [Student\UsersController::class, 'profile'])->name('profile');
 
     // Courses
     Route::get('join-courses', [Student\CoursesController::class, 'join'])->name('courses.join');
