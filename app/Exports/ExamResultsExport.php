@@ -14,7 +14,7 @@ class ExamResultsExport implements FromArray
 
     public function array(): array
     {
-        $data = [['Learner Reference Number', 'Student Name', 'Email Address', 'Contact Number', 'Score']];
+        $data = [['Learner Reference Number', 'Student Name', 'Score', 'Total Items']];
         $male = [['List of Males']];
         $female = [['List of Females']];
         $exam_details = $this->exam->examDetails;
@@ -24,17 +24,17 @@ class ExamResultsExport implements FromArray
                 "{$student->last_name}, {$student->first_name} {$student->middle_name}"
             );
             $exam_detail->gender = $student->gender;
+            $exam_detail->total_items = $exam_detail->exam->total_questions;
         }
         $exam_details_data = $exam_details->sortBy('student_name');
 
         foreach ($exam_details_data as $exam_detail) {
             $student = $exam_detail->student;
             $student_detail = [
-                'code' => (string)$student->code,
+                'code' => $student->code,
                 'student_name' => ucwords("{$student->last_name}, {$student->first_name} {$student->middle_name}"),
-                'email_address' => $student->email,
-                'contact_number' => $student->contact_number,
-                'score' => (string)$exam_detail->exam_result
+                'score' => (string)$exam_detail->exam_result,
+                'total_items' => (string)$exam_detail->total_items
             ];
 
             if ($exam_detail->gender == 'Male') {

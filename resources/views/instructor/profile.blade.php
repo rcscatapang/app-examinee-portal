@@ -47,7 +47,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <span class="avatar avatar-xl rounded-circle mb-4">
-                                        <img src="{{ asset('/user/' . $instructor->photo) }}">
+                                        @if($instructor->photo)
+                                            <img src="{{ asset('/user/' . $instructor->photo) }}">
+                                        @else
+                                            <i class="fas fa-2x fa-user"></i>
+                                        @endif
                                     </span>
                                 </div>
                             </div>
