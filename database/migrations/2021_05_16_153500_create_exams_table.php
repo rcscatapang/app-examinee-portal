@@ -22,6 +22,8 @@ class CreateExamsTable extends Migration
             $table->integer('total_questions')->default(0);
             $table->timestamp('start_date');
             $table->timestamp('end_date');
+            $table->integer('finish_in_minutes')->nullable();
+            $table->integer('additional_points')->nullable();
             $table->timestamp('published_date')->nullable();
             $table->timestamp('completed_date')->nullable();
             $table->integer('status')->default(\App\Enums\ExamStatus::Draft);

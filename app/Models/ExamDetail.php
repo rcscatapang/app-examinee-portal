@@ -17,6 +17,7 @@ class ExamDetail extends Model
         'code',
         'exam_score',
         'exam_result',
+        'additional_points',
         'date_completed',
         'status',
         'photo',

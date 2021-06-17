@@ -18,6 +18,7 @@ class CreateExamDetailsTable extends Migration
             $table->string('code')->unique();
             $table->integer('exam_score')->default(0);
             $table->integer('exam_result')->default(0);
+            $table->integer('additional_points')->default(0);
             $table->timestamp('date_completed')->nullable();
             $table->integer('status');
             $table->text('photo')->nullable();

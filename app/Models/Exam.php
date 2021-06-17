@@ -22,6 +22,8 @@ class Exam extends Model
         'total_questions',
         'start_date',
         'end_date',
+        'finish_in_minutes',
+        'additional_points',
         'published_date',
         'completed_date',
         'status',
