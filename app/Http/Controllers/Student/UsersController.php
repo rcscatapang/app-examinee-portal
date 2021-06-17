@@ -9,6 +9,6 @@ class UsersController extends Controller
     public function profile()
     {
         $student = auth()->user()->student;
-        return view('instructor.profile', compact(['student']));
+        return view('student.profile', compact(['student']));
     }
 }

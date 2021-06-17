@@ -84,14 +84,24 @@
                                     @if(count($exam->questions) > 0)
                                         <div class="mb-5">
                                             @foreach($exam->questions as $question)
-                                                <div class="mb-4">
-                                                    <p class="mb-0 font-weight-500">Question #{{ $question->order }}</p>
+                                                <div class="mb-4 pb-2 border-bottom">
+                                                    <p class="mb-0 font-weight-500">
+                                                        Question #{{ $question->order }}
+                                                    </p>
                                                     <p> {{ $question->question }} </p>
                                                     @foreach($question->options as $key => $option)
                                                         <p class="mb-0 @if($option->is_correct) text-success @endif">
                                                             {{ $key + 1 }}. {{ $option->option }}
                                                         </p>
                                                     @endforeach
+                                                    <form method="post"
+                                                          action="{{ route('instructor.exams.delete', [$exam->id, $question->id]) }}"
+                                                          class="pt-4">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-trash mr-2"></i> Delete
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             @endforeach
                                         </div>

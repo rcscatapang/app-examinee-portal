@@ -33,11 +33,10 @@ Route::name('instructor.')->prefix('instructor')->middleware(['web.instructor'])
     Route::post('exams', [Instructor\ExamsController::class, 'store'])->name('exams.store');
     Route::get('exams/create', [Instructor\ExamsController::class, 'create'])->name('exams.create');
     Route::get('exams/{exam}', [Instructor\ExamsController::class, 'show'])->name('exams.show');
-    Route::get('exams/{exam}/edit', [Instructor\ExamsController::class, 'edit'])->name('exams.edit');
-    Route::post('exams/{exam}/update', [Instructor\ExamsController::class, 'update'])->name('exams.update');
     Route::post('exams/{exam}/complete', [Instructor\ExamsController::class, 'complete'])->name('exams.complete');
     Route::post('exams/{exam}/publish', [Instructor\ExamsController::class, 'publish'])->name('exams.publish');
     Route::post('exams/{exam}/create/setup', [Instructor\ExamsController::class, 'setup'])->name('exams.setup');
+    Route::post('exams/{exam}/delete/setup/{question}', [Instructor\ExamsController::class, 'delete'])->name('exams.delete');
     Route::get('exams/{exam}/export', [Instructor\ExamsController::class, 'export'])->name('exams.export');
 
     Route::get('exams/{exam_detail}/detail', [Instructor\ExamDetailsController::class, 'show'])->name('examDetails.show');

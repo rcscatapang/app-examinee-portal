@@ -140,12 +140,28 @@ class ExamsController extends Controller
         return redirect()->back();
     }
 
-    public function edit()
+    public function delete(Exam $exam, Question $question): RedirectResponse
     {
-    }
+        if ($question->options) {
+            $question->options()->forceDelete();
+        }
 
-    public function update()
-    {
+        $question->forceDelete();
+        $questions = $exam->questions;
+
+        /* Reset total questions count */
+        $exam->total_questions = count($exam->questions);
+        $exam->save();
+
+        /* Re-order questions */
+        $new_order = 1;
+        foreach ($questions as $question) {
+            $question->order = $new_order;
+            $question->save();
+            $new_order++;
+        }
+
+        return redirect()->back();
     }
 
     public function complete(Exam $exam): RedirectResponse
