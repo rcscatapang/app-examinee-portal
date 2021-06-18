@@ -31,7 +31,7 @@ class ExamResultsExport implements FromArray
         foreach ($exam_details_data as $exam_detail) {
             $student = $exam_detail->student;
             $student_detail = [
-                'code' => $student->code,
+                'code' => "LRN# {$student->code}",
                 'student_name' => ucwords("{$student->last_name}, {$student->first_name} {$student->middle_name}"),
                 'score' => (string)$exam_detail->exam_result,
                 'total_items' => (string)$exam_detail->total_items
