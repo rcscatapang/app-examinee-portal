@@ -52,7 +52,7 @@
                                 </dd>
                             </dl>
                             <div>
-                                <img src="{{ asset('/student/' . $exam_detail->photo) }}" class="img-fluid"
+                                <img src="{{ url('storage/student/' . $exam_detail->photo) }}" class="img-fluid"
                                      style="max-height: 200px;">
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                         <p class="font-weight-500"> {{ $question->question }} </p>
                                         @if($question->referenced_file)
                                             <div class="my-4">
-                                                <img src="{{ asset('/exam/' . $question->referenced_file) }}"
+                                                <img src="{{ url('storage/exam/' . $question->referenced_file) }}"
                                                      class="img-fluid" style="max-height: 100px;">
                                             </div>
                                         @endif

@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <span class="avatar avatar-xl rounded-circle mb-4">
-                                        <img src="{{ asset('/user/' . $student->photo) }}">
+                                        <img src="{{ url('storage/user/' . $student->photo) }}">
                                     </span>
                                 </div>
                             </div>
